@@ -1,0 +1,5 @@
+$ spectest run
+# expected: nothing left to do; no second email
+
+[spectest] onboard: action=noop, commit_sha=nogit-bfe636609162, spec_version=2
+No changes detected (spec v2, commit nogit-bfe636). Last run: 27/27 passed.

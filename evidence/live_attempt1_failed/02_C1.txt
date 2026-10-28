@@ -1,0 +1,11 @@
+$ spectest run
+# expected: spec v1 stored; tests generated from the spec and run; report saved
+
+[spectest] spec_baseline_created: version=1, spec_hash=e1f98edb708c
+[spectest] onboard: action=generate, commit_sha=nogit-184514945f52, spec_version=1
+[spectest] tests_generated: attempt=1, provider=groq, valid=False, problem=Disallowed import: time, used_previous_suite=False, lessons=0
+[spectest] tests_generated: attempt=2, provider=groq, valid=False, problem=Disallowed import: pathlib, used_previous_suite=False, lessons=0
+[spectest] tests_generated: attempt=3, provider=gemini, valid=False, problem=Disallowed import: time, used_previous_suite=False, lessons=0
+ERROR: Generated tests rejected after 3 attempts: Disallowed import: time
+[spectest] groq unavailable (HTTP 429); skipping it for 19s
+[spectest] warning: groq: RateLimitError: Error code: 429 - {'error': {'message': 'Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01jz0qh94wftsszrwdn2bnw8cy` service tier `on_demand` on tokens per minute (TPM): Limit 8000, Used 4180, Requested 6324. Please try again in 18.78s. Need more tokens? -> fell back to gemini

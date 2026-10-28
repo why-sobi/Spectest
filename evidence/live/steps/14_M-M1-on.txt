@@ -1,0 +1,5 @@
+$ spectest run
+# expected: nothing to do: 0 LLM calls, no new report (already reported)
+
+[spectest] onboard: action=noop, commit_sha=nogit-184514945f52, spec_version=1
+No changes detected (spec v1, commit nogit-184514). Last run: 23/23 passed.

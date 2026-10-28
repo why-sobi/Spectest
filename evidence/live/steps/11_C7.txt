@@ -1,0 +1,7 @@
+$ spectest run
+# expected: wrong SMTP password: failure recorded, run kept, no duplicate
+
+[spectest] onboard: action=rerun, commit_sha=nogit-bfe636609162, spec_version=2
+[spectest] tests_executed: exit_code=0, total=27, passed=27, failed=0
+[spectest] email_failed: 
+[SpecTest] incidentzero @ nogit-bfe636: PASS (27/27 passed) (email failed: login rejected for owner@[redacted] (server closed the connection during login). Gmail needs an App Password, not your normal password: turn on 2-Step Verification, then create one at https://myaccount.google.com/apppasswords (16 letters). School/work accounts: your admin may have disabled App Passwords; use a personal Gmail as SMTP_USER instead.; will retry on the next run)

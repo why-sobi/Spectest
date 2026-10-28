@@ -1,0 +1,83 @@
+C1: 50/70 passed
+
+Identified multiple TEST_BUGs related to incorrect mock data/object initialization in tests and CODE_BUGs in ReplanPolicy.evaluate. The ToolRegistry errors are likely TEST_BUGs due to an incorrect mocking strategy for schema loading.
+
+- test_risk_policy_risk_known_tools: TEST BUG
+  Why: The mock configuration for RiskPolicy uses uppercase risk levels (e.g., 'LOW'), but the RiskLevel enum expects lowercase strings (e.g., 'low'). This causes a ValueError during enum conversion.
+  Fix: Change the mock config data in the 'mock_risk_config_path' fixture to use lowercase risk levels.
+
+- test_risk_policy_requires_human_approval_known_tools: TEST BUG
+  Why: The mock configuration for RiskPolicy uses uppercase risk levels (e.g., 'LOW'), but the RiskLevel enum expects lowercase strings (e.g., 'low'). This causes a ValueError during enum conversion.
+  Fix: Change the mock config data in the 'mock_risk_config_path' fixture to use lowercase risk levels.
+
+- test_agent_state_initialization: TEST BUG
+  Why: The AgentPlan constructor requires a 'hypothesis' argument, which is not provided in the test's initialization of AgentState.
+  Fix: Modify the AgentPlan initialization to include a 'hypothesis' argument, e.g., 'AgentPlan(steps=[], hypothesis="mock_hypothesis")'.
+
+- test_agent_state_observe_result_with_evidence_id: TEST BUG
+  Why: The AgentPlan constructor requires a 'hypothesis' argument, which is not provided in the test's initialization of AgentState.
+  Fix: Modify the AgentPlan initialization to include a 'hypothesis' argument, e.g., 'AgentPlan(steps=[], hypothesis="mock_hypothesis")'.
+
+- test_agent_state_observe_result_with_world_version: TEST BUG
+  Why: The AgentPlan constructor requires a 'hypothesis' argument, which is not provided in the test's initialization of AgentState.
+  Fix: Modify the AgentPlan initialization to include a 'hypothesis' argument, e.g., 'AgentPlan(steps=[], hypothesis="mock_hypothesis")'.
+
+- test_agent_state_observe_result_last_tool_results_limit: TEST BUG
+  Why: The AgentPlan constructor requires a 'hypothesis' argument, which is not provided in the test's initialization of AgentState.
+  Fix: Modify the AgentPlan initialization to include a 'hypothesis' argument, e.g., 'AgentPlan(steps=[], hypothesis="mock_hypothesis")'.
+
+- test_agent_state_observe_result_all_fields: TEST BUG
+  Why: The AgentPlan constructor requires a 'hypothesis' argument, which is not provided in the test's initialization of AgentState.
+  Fix: Modify the AgentPlan initialization to include a 'hypothesis' argument, e.g., 'AgentPlan(steps=[], hypothesis="mock_hypothesis")'.
+
+- test_replan_policy_evaluate[error-True-replan]: SPEC AMBIGUITY at incidentzero/agent/policies.py
+  Why: The ReplanPolicy.evaluate method likely returns 'retry' for a status of 'error' when 'retryable' is true, contradicting the spec which states that 'error' (and other unknown statuses) should always result in 'replan', even if 'retryable' is true. [Reported as a code bug, but the agent could not quote the spec requirement it breaks, so treat this as unconfirmed.]
+  Fix: Adjust the implementation of ReplanPolicy.evaluate in incidentzero/agent/policies.py to prioritize the 'replan' rule for 'error' and unknown statuses over the 'retry' rule for 'retryable: true'.
+
+- test_replan_policy_evaluate[another_status-True-replan]: SPEC AMBIGUITY at incidentzero/agent/policies.py
+  Why: The ReplanPolicy.evaluate method likely returns 'retry' for an unknown status when 'retryable' is true, contradicting the spec which states that unknown statuses should always result in 'replan', even if 'retryable' is true. [Reported as a code bug, but the agent could not quote the spec requirement it breaks, so treat this as unconfirmed.]
+  Fix: Adjust the implementation of ReplanPolicy.evaluate in incidentzero/agent/policies.py to prioritize the 'replan' rule for 'error' and unknown statuses over the 'retry' rule for 'retryable: true'.
+
+- test_tool_registry_validate_known_tool_valid_args: TEST BUG
+  Why: The 'tool_registry' fixture's mocking strategy for 'ToolRegistry._load_tool_schemas' is incorrect or the mocked method does not exist/is not called, leading to an ERROR during test setup. The spec does not define how ToolRegistry loads schemas.
+  Fix: Adjust the mocking strategy in the 'tool_registry' fixture to correctly handle schema loading for ToolRegistry, or if the schema loading is not meant to be mocked this way, remove the patch.
+
+- test_tool_registry_validate_known_tool_valid_args_with_defaults: TEST BUG
+  Why: The 'tool_registry' fixture's mocking strategy for 'ToolRegistry._load_tool_schemas' is incorrect or the mocked method does not exist/is not called, leading to an ERROR during test setup. The spec does not define how ToolRegistry loads schemas.
+  Fix: Adjust the mocking strategy in the 'tool_registry' fixture to correctly handle schema loading for ToolRegistry, or if the schema loading is not meant to be mocked this way, remove the patch.
+
+- test_tool_registry_validate_known_tool_no_args_tool: TEST BUG
+  Why: The 'tool_registry' fixture's mocking strategy for 'ToolRegistry._load_tool_schemas' is incorrect or the mocked method does not exist/is not called, leading to an ERROR during test setup. The spec does not define how ToolRegistry loads schemas.
+  Fix: Adjust the mocking strategy in the 'tool_registry' fixture to correctly handle schema loading for ToolRegistry, or if the schema loading is not meant to be mocked this way, remove the patch.
+
+- test_tool_registry_validate_unknown_tool: TEST BUG
+  Why: The 'tool_registry' fixture's mocking strategy for 'ToolRegistry._load_tool_schemas' is incorrect or the mocked method does not exist/is not called, leading to an ERROR during test setup. The spec does not define how ToolRegistry loads schemas.
+  Fix: Adjust the mocking strategy in the 'tool_registry' fixture to correctly handle schema loading for ToolRegistry, or if the schema loading is not meant to be mocked this way, remove the patch.
+
+- test_tool_registry_validate_missing_required_field: TEST BUG
+  Why: The 'tool_registry' fixture's mocking strategy for 'ToolRegistry._load_tool_schemas' is incorrect or the mocked method does not exist/is not called, leading to an ERROR during test setup. The spec does not define how ToolRegistry loads schemas.
+  Fix: Adjust the mocking strategy in the 'tool_registry' fixture to correctly handle schema loading for ToolRegistry, or if the schema loading is not meant to be mocked this way, remove the patch.
+
+- test_tool_registry_validate_wrong_type: TEST BUG
+  Why: The 'tool_registry' fixture's mocking strategy for 'ToolRegistry._load_tool_schemas' is incorrect or the mocked method does not exist/is not called, leading to an ERROR during test setup. The spec does not define how ToolRegistry loads schemas.
+  Fix: Adjust the mocking strategy in the 'tool_registry' fixture to correctly handle schema loading for ToolRegistry, or if the schema loading is not meant to be mocked this way, remove the patch.
+
+- test_tool_registry_validate_out_of_range_value: TEST BUG
+  Why: The 'tool_registry' fixture's mocking strategy for 'ToolRegistry._load_tool_schemas' is incorrect or the mocked method does not exist/is not called, leading to an ERROR during test setup. The spec does not define how ToolRegistry loads schemas.
+  Fix: Adjust the mocking strategy in the 'tool_registry' fixture to correctly handle schema loading for ToolRegistry, or if the schema loading is not meant to be mocked this way, remove the patch.
+
+- test_tool_registry_validate_extra_field: TEST BUG
+  Why: The 'tool_registry' fixture's mocking strategy for 'ToolRegistry._load_tool_schemas' is incorrect or the mocked method does not exist/is not called, leading to an ERROR during test setup. The spec does not define how ToolRegistry loads schemas.
+  Fix: Adjust the mocking strategy in the 'tool_registry' fixture to correctly handle schema loading for ToolRegistry, or if the schema loading is not meant to be mocked this way, remove the patch.
+
+- test_tool_registry_execute_valid_arguments: TEST BUG
+  Why: The 'tool_registry' fixture's mocking strategy for 'ToolRegistry._load_tool_schemas' is incorrect or the mocked method does not exist/is not called, leading to an ERROR during test setup. The spec does not define how ToolRegistry loads schemas.
+  Fix: Adjust the mocking strategy in the 'tool_registry' fixture to correctly handle schema loading for ToolRegistry, or if the schema loading is not meant to be mocked this way, remove the patch.
+
+- test_tool_registry_execute_invalid_arguments_does_not_touch_environment: TEST BUG
+  Why: The 'tool_registry' fixture's mocking strategy for 'ToolRegistry._load_tool_schemas' is incorrect or the mocked method does not exist/is not called, leading to an ERROR during test setup. The spec does not define how ToolRegistry loads schemas.
+  Fix: Adjust the mocking strategy in the 'tool_registry' fixture to correctly handle schema loading for ToolRegistry, or if the schema loading is not meant to be mocked this way, remove the patch.
+
+- test_tool_registry_execute_unknown_tool_does_not_touch_environment: TEST BUG
+  Why: The 'tool_registry' fixture's mocking strategy for 'ToolRegistry._load_tool_schemas' is incorrect or the mocked method does not exist/is not called, leading to an ERROR during test setup. The spec does not define how ToolRegistry loads schemas.
+  Fix: Adjust the mocking strategy in the 'tool_registry' fixture to correctly handle schema loading for ToolRegistry, or if the schema loading is not meant to be mocked this way, remove the patch.

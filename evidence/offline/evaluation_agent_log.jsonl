@@ -1,0 +1,388 @@
+{"ts": "2026-10-27T17:22:36.860", "event": "memory_read", "table": "spec_baselines", "detail": "latest version: none"}
+{"ts": "2026-10-27T17:22:36.866", "event": "memory_write", "table": "spec_baselines", "detail": "v1 (2ce34c3c98b1)"}
+{"ts": "2026-10-27T17:22:36.867", "event": "spec_baseline_created", "version": 1, "spec_hash": "2ce34c3c98b1"}
+{"ts": "2026-10-27T17:22:36.868", "event": "memory_read", "table": "generated_test_suites", "detail": "current: none"}
+{"ts": "2026-10-27T17:22:36.869", "event": "memory_read", "table": "test_runs", "detail": "last run: none"}
+{"ts": "2026-10-27T17:22:36.870", "event": "onboard", "action": "generate", "commit_sha": "nogit-eaa41132955f", "spec_version": 1}
+{"ts": "2026-10-27T17:22:36.874", "event": "memory_read", "table": "generated_test_suites", "detail": "current: none"}
+{"ts": "2026-10-27T17:22:36.875", "event": "memory_read", "table": "lessons", "detail": "0 approved lessons"}
+{"ts": "2026-10-27T17:22:36.876", "event": "tests_generated", "attempt": 1, "provider": "stub", "valid": true, "problem": "", "used_previous_suite": false, "lessons": 0}
+{"ts": "2026-10-27T17:22:36.883", "event": "memory_write", "table": "generated_test_suites", "detail": "new CURRENT aee2735e; previous SUPERSEDED"}
+{"ts": "2026-10-27T17:22:36.885", "event": "memory_read", "table": "generated_test_suites", "detail": "current: aee2735e"}
+{"ts": "2026-10-27T17:22:39.568", "event": "tests_executed", "exit_code": 0, "total": 5, "passed": 5, "failed": 0}
+{"ts": "2026-10-27T17:22:39.596", "event": "memory_write", "table": "test_runs", "detail": "run a6de2eea: 5/5 passed"}
+{"ts": "2026-10-27T17:22:39.598", "event": "memory_read", "table": "test_runs", "detail": "report already delivered for nogit-eaa411: False"}
+{"ts": "2026-10-27T17:22:39.611", "event": "memory_write", "table": "notifications", "detail": "saved_to_outbox -> (outbox)"}
+{"ts": "2026-10-27T17:22:39.618", "event": "memory_write", "table": "test_runs", "detail": "run a6de2eea report delivered"}
+{"ts": "2026-10-27T17:22:39.619", "event": "email_sent", "channel": "outbox", "to": ""}
+{"ts": "2026-10-27T17:22:39.620", "event": "run_finished", "seconds": 2.8, "action": "generate", "passed": 5, "total": 5, "memory": "on"}
+{"ts": "2026-10-27T17:22:39.686", "event": "memory_read", "table": "spec_baselines", "detail": "latest version: 1"}
+{"ts": "2026-10-27T17:22:39.687", "event": "memory_read", "table": "generated_test_suites", "detail": "current: aee2735e"}
+{"ts": "2026-10-27T17:22:39.688", "event": "memory_read", "table": "test_runs", "detail": "last run: nogit-eaa4113295"}
+{"ts": "2026-10-27T17:22:39.688", "event": "onboard", "action": "noop", "commit_sha": "nogit-eaa41132955f", "spec_version": 1}
+{"ts": "2026-10-27T17:22:39.690", "event": "run_finished", "seconds": 0.1, "action": "noop", "passed": null, "total": null, "memory": "on"}
+{"ts": "2026-10-27T17:22:43.284", "event": "memory_read", "table": "spec_baselines", "detail": "latest version: 1"}
+{"ts": "2026-10-27T17:22:43.285", "event": "memory_read", "table": "generated_test_suites", "detail": "current: aee2735e"}
+{"ts": "2026-10-27T17:22:43.286", "event": "memory_read", "table": "test_runs", "detail": "last run: nogit-eaa4113295"}
+{"ts": "2026-10-27T17:22:43.287", "event": "onboard", "action": "noop", "commit_sha": "nogit-eaa41132955f", "spec_version": 1}
+{"ts": "2026-10-27T17:22:43.289", "event": "run_finished", "seconds": 0.1, "action": "noop", "passed": null, "total": null, "memory": "on"}
+{"ts": "2026-10-27T17:22:43.595", "event": "memory_read", "table": "spec_baselines", "detail": "latest version: 1"}
+{"ts": "2026-10-27T17:22:43.602", "event": "memory_write", "table": "spec_baselines", "detail": "v2 (9562cc0ef8b2)"}
+{"ts": "2026-10-27T17:22:43.603", "event": "spec_baseline_created", "version": 2, "spec_hash": "9562cc0ef8b2"}
+{"ts": "2026-10-27T17:22:43.605", "event": "memory_read", "table": "generated_test_suites", "detail": "current: aee2735e"}
+{"ts": "2026-10-27T17:22:43.606", "event": "memory_read", "table": "test_runs", "detail": "last run: nogit-eaa4113295"}
+{"ts": "2026-10-27T17:22:43.607", "event": "onboard", "action": "generate", "commit_sha": "nogit-eaa41132955f", "spec_version": 2}
+{"ts": "2026-10-27T17:22:43.610", "event": "memory_read", "table": "generated_test_suites", "detail": "current: aee2735e"}
+{"ts": "2026-10-27T17:22:43.611", "event": "memory_read", "table": "lessons", "detail": "0 approved lessons"}
+{"ts": "2026-10-27T17:22:43.614", "event": "tests_generated", "attempt": 1, "provider": "stub", "valid": true, "problem": "", "used_previous_suite": true, "lessons": 0}
+{"ts": "2026-10-27T17:22:43.622", "event": "memory_write", "table": "generated_test_suites", "detail": "new CURRENT 18022773; previous SUPERSEDED"}
+{"ts": "2026-10-27T17:22:43.624", "event": "memory_read", "table": "generated_test_suites", "detail": "current: 18022773"}
+{"ts": "2026-10-27T17:22:45.983", "event": "tests_executed", "exit_code": 0, "total": 6, "passed": 6, "failed": 0}
+{"ts": "2026-10-27T17:22:45.990", "event": "memory_write", "table": "test_runs", "detail": "run 69d4dd06: 6/6 passed"}
+{"ts": "2026-10-27T17:22:45.992", "event": "memory_read", "table": "test_runs", "detail": "report already delivered for nogit-eaa411: False"}
+{"ts": "2026-10-27T17:22:46.000", "event": "memory_write", "table": "notifications", "detail": "saved_to_outbox -> (outbox)"}
+{"ts": "2026-10-27T17:22:46.007", "event": "memory_write", "table": "test_runs", "detail": "run 69d4dd06 report delivered"}
+{"ts": "2026-10-27T17:22:46.008", "event": "email_sent", "channel": "outbox", "to": ""}
+{"ts": "2026-10-27T17:22:46.009", "event": "run_finished", "seconds": 2.5, "action": "generate", "passed": 6, "total": 6, "memory": "on"}
+{"ts": "2026-10-27T17:22:46.076", "event": "memory_read", "table": "spec_baselines", "detail": "latest version: 2"}
+{"ts": "2026-10-27T17:22:46.077", "event": "memory_read", "table": "generated_test_suites", "detail": "current: 18022773"}
+{"ts": "2026-10-27T17:22:46.078", "event": "memory_read", "table": "test_runs", "detail": "last run: nogit-eaa4113295"}
+{"ts": "2026-10-27T17:22:46.078", "event": "onboard", "action": "rerun", "commit_sha": "nogit-55cdb2ace6b9", "spec_version": 2}
+{"ts": "2026-10-27T17:22:46.080", "event": "memory_read", "table": "generated_test_suites", "detail": "current: 18022773"}
+{"ts": "2026-10-27T17:22:48.788", "event": "tests_executed", "exit_code": 1, "total": 6, "passed": 5, "failed": 1}
+{"ts": "2026-10-27T17:22:48.790", "event": "memory_read", "table": "generated_test_suites", "detail": "current: 18022773"}
+{"ts": "2026-10-27T17:22:48.791", "event": "memory_read", "table": "test_runs", "detail": "2 recent runs"}
+{"ts": "2026-10-27T17:22:48.792", "event": "memory_read", "table": "lessons", "detail": "0 approved lessons"}
+{"ts": "2026-10-27T17:22:48.806", "event": "agent_tool", "tool": "read_file", "result": "src/calculator.py (lines 1-16 of 16)"}
+{"ts": "2026-10-27T17:22:48.808", "event": "agent_tool", "tool": "finish", "result": "Recorded."}
+{"ts": "2026-10-27T17:22:48.810", "event": "investigated", "steps": 2, "repairs": 0, "error": ""}
+{"ts": "2026-10-27T17:22:48.824", "event": "memory_write", "table": "test_runs", "detail": "run 0cadd5bd: 5/6 passed"}
+{"ts": "2026-10-27T17:22:48.826", "event": "memory_read", "table": "test_runs", "detail": "report already delivered for nogit-55cdb2: False"}
+{"ts": "2026-10-27T17:22:48.836", "event": "memory_write", "table": "notifications", "detail": "saved_to_outbox -> (outbox)"}
+{"ts": "2026-10-27T17:22:48.844", "event": "memory_write", "table": "test_runs", "detail": "run 0cadd5bd report delivered"}
+{"ts": "2026-10-27T17:22:48.845", "event": "email_sent", "channel": "outbox", "to": ""}
+{"ts": "2026-10-27T17:22:48.846", "event": "run_finished", "seconds": 2.8, "action": "rerun", "passed": 5, "total": 6, "memory": "on"}
+{"ts": "2026-10-27T17:22:48.911", "event": "memory_read", "table": "spec_baselines", "detail": "latest version: 2"}
+{"ts": "2026-10-27T17:22:48.912", "event": "memory_read", "table": "generated_test_suites", "detail": "current: 18022773"}
+{"ts": "2026-10-27T17:22:48.914", "event": "memory_read", "table": "test_runs", "detail": "last run: nogit-55cdb2ace6"}
+{"ts": "2026-10-27T17:22:48.915", "event": "onboard", "action": "noop", "commit_sha": "nogit-55cdb2ace6b9", "spec_version": 2}
+{"ts": "2026-10-27T17:22:48.916", "event": "run_finished", "seconds": 0.0, "action": "noop", "passed": null, "total": null, "memory": "on"}
+{"ts": "2026-10-27T17:22:48.977", "event": "memory_read", "table": "spec_baselines", "detail": "latest version: 2"}
+{"ts": "2026-10-27T17:22:48.978", "event": "memory_read", "table": "generated_test_suites", "detail": "current: 18022773"}
+{"ts": "2026-10-27T17:22:48.978", "event": "memory_read", "table": "test_runs", "detail": "last run: nogit-55cdb2ace6"}
+{"ts": "2026-10-27T17:22:48.979", "event": "onboard", "action": "noop", "commit_sha": "nogit-55cdb2ace6b9", "spec_version": 2}
+{"ts": "2026-10-27T17:22:48.981", "event": "run_finished", "seconds": 0.1, "action": "noop", "passed": null, "total": null, "memory": "on"}
+{"ts": "2026-10-27T17:22:49.057", "event": "memory_read", "table": "spec_baselines", "detail": "latest version: 2"}
+{"ts": "2026-10-27T17:22:49.064", "event": "memory_write", "table": "spec_baselines", "detail": "v3 (c8d005cb80cb)"}
+{"ts": "2026-10-27T17:22:49.065", "event": "spec_baseline_created", "version": 3, "spec_hash": "c8d005cb80cb"}
+{"ts": "2026-10-27T17:22:49.066", "event": "memory_read", "table": "generated_test_suites", "detail": "current: 18022773"}
+{"ts": "2026-10-27T17:22:49.067", "event": "memory_read", "table": "test_runs", "detail": "last run: nogit-55cdb2ace6"}
+{"ts": "2026-10-27T17:22:49.068", "event": "onboard", "action": "generate", "commit_sha": "nogit-55cdb2ace6b9", "spec_version": 3}
+{"ts": "2026-10-27T17:22:49.071", "event": "memory_read", "table": "generated_test_suites", "detail": "current: 18022773"}
+{"ts": "2026-10-27T17:22:49.071", "event": "memory_read", "table": "lessons", "detail": "0 approved lessons"}
+{"ts": "2026-10-27T17:22:49.072", "event": "tests_generated", "attempt": 1, "provider": "stub", "valid": false, "problem": "Disallowed import: os", "used_previous_suite": true, "lessons": 0}
+{"ts": "2026-10-27T17:22:49.074", "event": "tests_generated", "attempt": 2, "provider": "stub", "valid": true, "problem": "", "used_previous_suite": true, "lessons": 0}
+{"ts": "2026-10-27T17:22:49.081", "event": "memory_write", "table": "generated_test_suites", "detail": "new CURRENT e2f7422c; previous SUPERSEDED"}
+{"ts": "2026-10-27T17:22:49.083", "event": "memory_read", "table": "generated_test_suites", "detail": "current: e2f7422c"}
+{"ts": "2026-10-27T17:22:51.718", "event": "tests_executed", "exit_code": 1, "total": 6, "passed": 5, "failed": 1}
+{"ts": "2026-10-27T17:22:51.720", "event": "memory_read", "table": "generated_test_suites", "detail": "current: e2f7422c"}
+{"ts": "2026-10-27T17:22:51.722", "event": "memory_read", "table": "test_runs", "detail": "3 recent runs"}
+{"ts": "2026-10-27T17:22:51.723", "event": "memory_read", "table": "lessons", "detail": "0 approved lessons"}
+{"ts": "2026-10-27T17:22:51.738", "event": "agent_tool", "tool": "write_tests", "result": "REJECTED: Deleting or renaming tests is not allowed: test_subtract"}
+{"ts": "2026-10-27T17:22:51.741", "event": "agent_tool", "tool": "finish", "result": "Recorded."}
+{"ts": "2026-10-27T17:22:51.743", "event": "investigated", "steps": 2, "repairs": 0, "error": ""}
+{"ts": "2026-10-27T17:22:51.766", "event": "memory_write", "table": "test_runs", "detail": "run c4736be4: 5/6 passed"}
+{"ts": "2026-10-27T17:22:51.768", "event": "memory_read", "table": "test_runs", "detail": "report already delivered for nogit-55cdb2: False"}
+{"ts": "2026-10-27T17:22:51.775", "event": "memory_write", "table": "notifications", "detail": "saved_to_outbox -> (outbox)"}
+{"ts": "2026-10-27T17:22:51.781", "event": "memory_write", "table": "test_runs", "detail": "run c4736be4 report delivered"}
+{"ts": "2026-10-27T17:22:51.782", "event": "email_sent", "channel": "outbox", "to": ""}
+{"ts": "2026-10-27T17:22:51.783", "event": "run_finished", "seconds": 2.8, "action": "generate", "passed": 5, "total": 6, "memory": "on"}
+{"ts": "2026-10-27T17:22:51.849", "event": "memory_read", "table": "spec_baselines", "detail": "latest version: 3"}
+{"ts": "2026-10-27T17:22:51.855", "event": "memory_write", "table": "spec_baselines", "detail": "v4 (8ebc309f72c0)"}
+{"ts": "2026-10-27T17:22:51.858", "event": "spec_baseline_created", "version": 4, "spec_hash": "8ebc309f72c0"}
+{"ts": "2026-10-27T17:22:51.859", "event": "memory_read", "table": "generated_test_suites", "detail": "current: e2f7422c"}
+{"ts": "2026-10-27T17:22:51.860", "event": "memory_read", "table": "test_runs", "detail": "last run: nogit-55cdb2ace6"}
+{"ts": "2026-10-27T17:22:51.861", "event": "onboard", "action": "generate", "commit_sha": "nogit-55cdb2ace6b9", "spec_version": 4}
+{"ts": "2026-10-27T17:22:51.864", "event": "memory_read", "table": "generated_test_suites", "detail": "current: e2f7422c"}
+{"ts": "2026-10-27T17:22:51.865", "event": "memory_read", "table": "lessons", "detail": "0 approved lessons"}
+{"ts": "2026-10-27T17:22:51.866", "event": "tests_generated", "attempt": 1, "provider": "stub", "valid": false, "problem": "SyntaxError: invalid syntax (<unknown>, line 1)", "used_previous_suite": true, "lessons": 0}
+{"ts": "2026-10-27T17:22:51.866", "event": "tests_generated", "attempt": 2, "provider": "stub", "valid": false, "problem": "No test_ functions found", "used_previous_suite": true, "lessons": 0}
+{"ts": "2026-10-27T17:22:51.868", "event": "tests_generated", "attempt": 3, "provider": "stub", "valid": true, "problem": "", "used_previous_suite": true, "lessons": 0}
+{"ts": "2026-10-27T17:22:51.874", "event": "memory_write", "table": "generated_test_suites", "detail": "new CURRENT 08940f1a; previous SUPERSEDED"}
+{"ts": "2026-10-27T17:22:51.876", "event": "memory_read", "table": "generated_test_suites", "detail": "current: 08940f1a"}
+{"ts": "2026-10-27T17:22:54.532", "event": "tests_executed", "exit_code": 1, "total": 6, "passed": 5, "failed": 1}
+{"ts": "2026-10-27T17:22:54.534", "event": "memory_read", "table": "generated_test_suites", "detail": "current: 08940f1a"}
+{"ts": "2026-10-27T17:22:54.536", "event": "memory_read", "table": "test_runs", "detail": "3 recent runs"}
+{"ts": "2026-10-27T17:22:54.537", "event": "memory_read", "table": "lessons", "detail": "0 approved lessons"}
+{"ts": "2026-10-27T17:22:54.547", "event": "agent_tool", "tool": "read_file", "result": "src/calculator.py (lines 1-16 of 16)"}
+{"ts": "2026-10-27T17:22:54.549", "event": "agent_tool", "tool": "finish", "result": "Recorded."}
+{"ts": "2026-10-27T17:22:54.551", "event": "investigated", "steps": 2, "repairs": 0, "error": ""}
+{"ts": "2026-10-27T17:22:54.576", "event": "memory_write", "table": "test_runs", "detail": "run 60820e4f: 5/6 passed"}
+{"ts": "2026-10-27T17:22:54.577", "event": "memory_read", "table": "test_runs", "detail": "report already delivered for nogit-55cdb2: False"}
+{"ts": "2026-10-27T17:22:54.585", "event": "memory_write", "table": "notifications", "detail": "saved_to_outbox -> (outbox)"}
+{"ts": "2026-10-27T17:22:54.592", "event": "memory_write", "table": "test_runs", "detail": "run 60820e4f report delivered"}
+{"ts": "2026-10-27T17:22:54.593", "event": "email_sent", "channel": "outbox", "to": ""}
+{"ts": "2026-10-27T17:22:54.595", "event": "run_finished", "seconds": 2.8, "action": "generate", "passed": 5, "total": 6, "memory": "on"}
+{"ts": "2026-10-27T17:22:54.659", "event": "memory_read", "table": "spec_baselines", "detail": "latest version: 4"}
+{"ts": "2026-10-27T17:22:54.667", "event": "memory_write", "table": "spec_baselines", "detail": "v5 (bb76e2caf160)"}
+{"ts": "2026-10-27T17:22:54.668", "event": "spec_baseline_created", "version": 5, "spec_hash": "bb76e2caf160"}
+{"ts": "2026-10-27T17:22:54.669", "event": "memory_read", "table": "generated_test_suites", "detail": "current: 08940f1a"}
+{"ts": "2026-10-27T17:22:54.670", "event": "memory_read", "table": "test_runs", "detail": "last run: nogit-55cdb2ace6"}
+{"ts": "2026-10-27T17:22:54.671", "event": "onboard", "action": "generate", "commit_sha": "nogit-55cdb2ace6b9", "spec_version": 5}
+{"ts": "2026-10-27T17:22:54.674", "event": "memory_read", "table": "generated_test_suites", "detail": "current: 08940f1a"}
+{"ts": "2026-10-27T17:22:54.675", "event": "memory_read", "table": "lessons", "detail": "0 approved lessons"}
+{"ts": "2026-10-27T17:22:54.676", "event": "generation_failed", "reason": "llm_unavailable", "detail": "All LLM providers failed (stub outage)"}
+{"ts": "2026-10-27T17:22:54.678", "event": "run_finished", "seconds": 0.1, "action": "generate", "passed": null, "total": null, "memory": "on"}
+{"ts": "2026-10-27T17:22:54.732", "event": "memory_read", "table": "spec_baselines", "detail": "latest version: 5"}
+{"ts": "2026-10-27T17:22:54.733", "event": "memory_read", "table": "generated_test_suites", "detail": "current: 08940f1a"}
+{"ts": "2026-10-27T17:22:54.734", "event": "memory_read", "table": "test_runs", "detail": "last run: nogit-55cdb2ace6"}
+{"ts": "2026-10-27T17:22:54.734", "event": "onboard", "action": "generate", "commit_sha": "nogit-55cdb2ace6b9", "spec_version": 5}
+{"ts": "2026-10-27T17:22:54.737", "event": "memory_read", "table": "generated_test_suites", "detail": "current: 08940f1a"}
+{"ts": "2026-10-27T17:22:54.739", "event": "memory_read", "table": "lessons", "detail": "0 approved lessons"}
+{"ts": "2026-10-27T17:22:54.742", "event": "tests_generated", "attempt": 1, "provider": "stub", "valid": true, "problem": "", "used_previous_suite": true, "lessons": 0}
+{"ts": "2026-10-27T17:22:54.749", "event": "memory_write", "table": "generated_test_suites", "detail": "new CURRENT 0f92286b; previous SUPERSEDED"}
+{"ts": "2026-10-27T17:22:54.751", "event": "memory_read", "table": "generated_test_suites", "detail": "current: 0f92286b"}
+{"ts": "2026-10-27T17:22:57.516", "event": "tests_executed", "exit_code": 1, "total": 6, "passed": 5, "failed": 1}
+{"ts": "2026-10-27T17:22:57.518", "event": "memory_read", "table": "generated_test_suites", "detail": "current: 0f92286b"}
+{"ts": "2026-10-27T17:22:57.520", "event": "memory_read", "table": "test_runs", "detail": "3 recent runs"}
+{"ts": "2026-10-27T17:22:57.521", "event": "memory_read", "table": "lessons", "detail": "0 approved lessons"}
+{"ts": "2026-10-27T17:22:57.533", "event": "agent_tool", "tool": "read_file", "result": "src/calculator.py (lines 1-16 of 16)"}
+{"ts": "2026-10-27T17:22:57.538", "event": "agent_tool", "tool": "finish", "result": "Recorded."}
+{"ts": "2026-10-27T17:22:57.541", "event": "investigated", "steps": 2, "repairs": 0, "error": ""}
+{"ts": "2026-10-27T17:22:57.570", "event": "memory_write", "table": "test_runs", "detail": "run 6781d9d5: 5/6 passed"}
+{"ts": "2026-10-27T17:22:57.573", "event": "memory_read", "table": "test_runs", "detail": "report already delivered for nogit-55cdb2: False"}
+{"ts": "2026-10-27T17:22:57.581", "event": "memory_write", "table": "notifications", "detail": "saved_to_outbox -> (outbox)"}
+{"ts": "2026-10-27T17:22:57.588", "event": "memory_write", "table": "test_runs", "detail": "run 6781d9d5 report delivered"}
+{"ts": "2026-10-27T17:22:57.589", "event": "email_sent", "channel": "outbox", "to": ""}
+{"ts": "2026-10-27T17:22:57.591", "event": "run_finished", "seconds": 2.9, "action": "generate", "passed": 5, "total": 6, "memory": "on"}
+{"ts": "2026-10-27T17:22:57.679", "event": "memory_read", "table": "spec_baselines", "detail": "latest version: 5"}
+{"ts": "2026-10-27T17:22:57.686", "event": "memory_write", "table": "spec_baselines", "detail": "v6 (23fd48099b45)"}
+{"ts": "2026-10-27T17:22:57.687", "event": "spec_baseline_created", "version": 6, "spec_hash": "23fd48099b45"}
+{"ts": "2026-10-27T17:22:57.688", "event": "memory_read", "table": "generated_test_suites", "detail": "current: 0f92286b"}
+{"ts": "2026-10-27T17:22:57.689", "event": "memory_read", "table": "test_runs", "detail": "last run: nogit-55cdb2ace6"}
+{"ts": "2026-10-27T17:22:57.690", "event": "onboard", "action": "generate", "commit_sha": "nogit-6b999bec97c7", "spec_version": 6}
+{"ts": "2026-10-27T17:22:57.693", "event": "memory_read", "table": "generated_test_suites", "detail": "current: 0f92286b"}
+{"ts": "2026-10-27T17:22:57.694", "event": "memory_read", "table": "lessons", "detail": "0 approved lessons"}
+{"ts": "2026-10-27T17:22:57.696", "event": "tests_generated", "attempt": 1, "provider": "stub", "valid": true, "problem": "", "used_previous_suite": true, "lessons": 0}
+{"ts": "2026-10-27T17:22:57.702", "event": "memory_write", "table": "generated_test_suites", "detail": "new CURRENT c4dada90; previous SUPERSEDED"}
+{"ts": "2026-10-27T17:22:57.705", "event": "memory_read", "table": "generated_test_suites", "detail": "current: c4dada90"}
+{"ts": "2026-10-27T17:23:00.791", "event": "tests_executed", "exit_code": 0, "total": 6, "passed": 6, "failed": 0}
+{"ts": "2026-10-27T17:23:00.799", "event": "memory_write", "table": "test_runs", "detail": "run 110c9258: 6/6 passed"}
+{"ts": "2026-10-27T17:23:00.802", "event": "email_skipped", "reason": "email_on=failure"}
+{"ts": "2026-10-27T17:23:00.803", "event": "run_finished", "seconds": 3.2, "action": "generate", "passed": 6, "total": 6, "memory": "on"}
+{"ts": "2026-10-27T17:23:00.869", "event": "memory_read", "table": "spec_baselines", "detail": "latest version: 6"}
+{"ts": "2026-10-27T17:23:00.870", "event": "memory_read", "table": "generated_test_suites", "detail": "current: c4dada90"}
+{"ts": "2026-10-27T17:23:00.871", "event": "memory_read", "table": "test_runs", "detail": "last run: nogit-6b999bec97"}
+{"ts": "2026-10-27T17:23:00.872", "event": "onboard", "action": "noop", "commit_sha": "nogit-6b999bec97c7", "spec_version": 6}
+{"ts": "2026-10-27T17:23:00.874", "event": "run_finished", "seconds": 0.1, "action": "noop", "passed": null, "total": null, "memory": "on"}
+{"ts": "2026-10-27T17:23:01.187", "event": "memory_read", "table": "spec_baselines", "detail": "latest version: 6"}
+{"ts": "2026-10-27T17:23:01.188", "event": "memory_read", "table": "generated_test_suites", "detail": "current: c4dada90"}
+{"ts": "2026-10-27T17:23:01.189", "event": "memory_read", "table": "test_runs", "detail": "last run: nogit-6b999bec97"}
+{"ts": "2026-10-27T17:23:01.190", "event": "onboard", "action": "rerun", "commit_sha": "nogit-280193cbdded", "spec_version": 6}
+{"ts": "2026-10-27T17:23:01.193", "event": "memory_read", "table": "generated_test_suites", "detail": "current: c4dada90"}
+{"ts": "2026-10-27T17:23:01.222", "event": "manual_edit_backed_up", "backup": ".spectest/backups/20261027-172301_test_calculator_spec.py"}
+{"ts": "2026-10-27T17:23:04.107", "event": "tests_executed", "exit_code": 0, "total": 6, "passed": 6, "failed": 0}
+{"ts": "2026-10-27T17:23:04.114", "event": "memory_write", "table": "test_runs", "detail": "run 400f0249: 6/6 passed"}
+{"ts": "2026-10-27T17:23:04.116", "event": "email_skipped", "reason": "email_on=failure"}
+{"ts": "2026-10-27T17:23:04.118", "event": "run_finished", "seconds": 3.0, "action": "rerun", "passed": 6, "total": 6, "memory": "on"}
+{"ts": "2026-10-27T17:23:04.221", "event": "memory_read", "table": "spec_baselines", "detail": "latest version: 6"}
+{"ts": "2026-10-27T17:23:04.227", "event": "memory_write", "table": "spec_baselines", "detail": "v7 (8877a5d861c8)"}
+{"ts": "2026-10-27T17:23:04.229", "event": "spec_baseline_created", "version": 7, "spec_hash": "8877a5d861c8"}
+{"ts": "2026-10-27T17:23:04.231", "event": "memory_read", "table": "generated_test_suites", "detail": "current: c4dada90"}
+{"ts": "2026-10-27T17:23:04.232", "event": "memory_read", "table": "test_runs", "detail": "last run: nogit-280193cbdd"}
+{"ts": "2026-10-27T17:23:04.233", "event": "onboard", "action": "generate", "commit_sha": "nogit-280193cbdded", "spec_version": 7}
+{"ts": "2026-10-27T17:23:04.236", "event": "memory_read", "table": "generated_test_suites", "detail": "current: c4dada90"}
+{"ts": "2026-10-27T17:23:04.237", "event": "memory_read", "table": "lessons", "detail": "0 approved lessons"}
+{"ts": "2026-10-27T17:23:04.239", "event": "tests_generated", "attempt": 1, "provider": "stub", "valid": true, "problem": "", "used_previous_suite": true, "lessons": 0}
+{"ts": "2026-10-27T17:23:04.245", "event": "memory_write", "table": "generated_test_suites", "detail": "new CURRENT c66f576d; previous SUPERSEDED"}
+{"ts": "2026-10-27T17:23:04.248", "event": "memory_read", "table": "generated_test_suites", "detail": "current: c66f576d"}
+{"ts": "2026-10-27T17:23:07.074", "event": "tests_executed", "exit_code": 1, "total": 7, "passed": 6, "failed": 1}
+{"ts": "2026-10-27T17:23:07.077", "event": "memory_read", "table": "generated_test_suites", "detail": "current: c66f576d"}
+{"ts": "2026-10-27T17:23:07.078", "event": "memory_read", "table": "test_runs", "detail": "3 recent runs"}
+{"ts": "2026-10-27T17:23:07.079", "event": "memory_read", "table": "lessons", "detail": "0 approved lessons"}
+{"ts": "2026-10-27T17:23:07.088", "event": "agent_tool", "tool": "read_file", "result": "DENIED: '.env' may contain secrets"}
+{"ts": "2026-10-27T17:23:07.091", "event": "agent_tool", "tool": "read_file", "result": "DENIED: '../outside.txt' is outside the project"}
+{"ts": "2026-10-27T17:23:07.094", "event": "agent_tool", "tool": "read_file", "result": "src/calculator.py (lines 1-16 of 16)"}
+{"ts": "2026-10-27T17:23:07.099", "event": "agent_tool", "tool": "write_tests", "result": "REJECTED: Only currently failing tests may be changed; these were passing: test_add"}
+{"ts": "2026-10-27T17:23:07.104", "event": "agent_tool", "tool": "write_tests", "result": "REJECTED: spec_quote must be an exact passage (10+ characters) from the spec that proves the test is wrong"}
+{"ts": "2026-10-27T17:23:07.109", "event": "agent_tool", "tool": "write_tests", "result": "REJECTED: Skipping tests is not allowed (found `skip`)"}
+{"ts": "2026-10-27T17:23:07.133", "event": "agent_tool", "tool": "write_tests", "result": "ACCEPTED: test file updated. Call run_tests to verify."}
+{"ts": "2026-10-27T17:23:09.510", "event": "agent_tool", "tool": "run_tests", "result": "7/7 passed; failing: none"}
+{"ts": "2026-10-27T17:23:09.512", "event": "agent_tool", "tool": "finish", "result": "Recorded."}
+{"ts": "2026-10-27T17:23:09.513", "event": "investigated", "steps": 9, "repairs": 1, "error": ""}
+{"ts": "2026-10-27T17:23:09.522", "event": "memory_write", "table": "generated_test_suites", "detail": "new CURRENT 7b3b54a1; previous SUPERSEDED"}
+{"ts": "2026-10-27T17:23:09.529", "event": "memory_write", "table": "approvals", "detail": "test_repair 129fb2a3 PENDING"}
+{"ts": "2026-10-27T17:23:09.536", "event": "memory_write", "table": "lessons", "detail": "test_divide_fraction (PENDING)"}
+{"ts": "2026-10-27T17:23:09.537", "event": "approval_requested", "approval_id": "129fb2a3", "kind": "test_repair", "tests": "test_divide_fraction"}
+{"ts": "2026-10-27T17:23:09.540", "event": "memory_read", "table": "generated_test_suites", "detail": "current: 7b3b54a1"}
+{"ts": "2026-10-27T17:23:11.955", "event": "tests_executed", "exit_code": 0, "total": 7, "passed": 7, "failed": 0}
+{"ts": "2026-10-27T17:23:11.963", "event": "memory_write", "table": "test_runs", "detail": "run 22d4e952: 7/7 passed"}
+{"ts": "2026-10-27T17:23:11.971", "event": "memory_read", "table": "test_runs", "detail": "report already delivered for nogit-280193: False"}
+{"ts": "2026-10-27T17:23:11.980", "event": "memory_write", "table": "notifications", "detail": "saved_to_outbox -> (outbox)"}
+{"ts": "2026-10-27T17:23:11.986", "event": "memory_write", "table": "test_runs", "detail": "run 22d4e952 report delivered"}
+{"ts": "2026-10-27T17:23:11.987", "event": "email_sent", "channel": "outbox", "to": ""}
+{"ts": "2026-10-27T17:23:11.988", "event": "run_finished", "seconds": 7.8, "action": "generate", "passed": 7, "total": 7, "memory": "on"}
+{"ts": "2026-10-27T17:23:12.034", "event": "memory_read", "table": "spec_baselines", "detail": "latest version: 7"}
+{"ts": "2026-10-27T17:23:12.035", "event": "memory_read", "table": "generated_test_suites", "detail": "current: 7b3b54a1"}
+{"ts": "2026-10-27T17:23:12.037", "event": "memory_read", "table": "test_runs", "detail": "last run: nogit-280193cbdd"}
+{"ts": "2026-10-27T17:23:12.038", "event": "memory_read", "table": "approvals", "detail": "1 pending"}
+{"ts": "2026-10-27T17:23:12.100", "event": "memory_read", "table": "spec_baselines", "detail": "latest version: 7"}
+{"ts": "2026-10-27T17:23:12.107", "event": "memory_write", "table": "spec_baselines", "detail": "v8 (8ecbdff1c900)"}
+{"ts": "2026-10-27T17:23:12.108", "event": "spec_baseline_created", "version": 8, "spec_hash": "8ecbdff1c900"}
+{"ts": "2026-10-27T17:23:12.110", "event": "memory_read", "table": "generated_test_suites", "detail": "current: 7b3b54a1"}
+{"ts": "2026-10-27T17:23:12.111", "event": "memory_read", "table": "test_runs", "detail": "last run: nogit-280193cbdd"}
+{"ts": "2026-10-27T17:23:12.112", "event": "onboard", "action": "generate", "commit_sha": "nogit-280193cbdded", "spec_version": 8}
+{"ts": "2026-10-27T17:23:12.116", "event": "memory_read", "table": "generated_test_suites", "detail": "current: 7b3b54a1"}
+{"ts": "2026-10-27T17:23:12.117", "event": "memory_read", "table": "lessons", "detail": "0 approved lessons"}
+{"ts": "2026-10-27T17:23:12.120", "event": "tests_generated", "attempt": 1, "provider": "stub", "valid": true, "problem": "", "used_previous_suite": true, "lessons": 0}
+{"ts": "2026-10-27T17:23:12.128", "event": "memory_write", "table": "generated_test_suites", "detail": "new CURRENT d24a86b2; previous SUPERSEDED"}
+{"ts": "2026-10-27T17:23:12.130", "event": "memory_read", "table": "generated_test_suites", "detail": "current: d24a86b2"}
+{"ts": "2026-10-27T17:23:14.592", "event": "tests_executed", "exit_code": 0, "total": 6, "passed": 6, "failed": 0}
+{"ts": "2026-10-27T17:23:14.600", "event": "memory_write", "table": "test_runs", "detail": "run 35c0064c: 6/6 passed"}
+{"ts": "2026-10-27T17:23:14.602", "event": "email_skipped", "reason": "email_on=failure"}
+{"ts": "2026-10-27T17:23:14.603", "event": "run_finished", "seconds": 2.6, "action": "generate", "passed": 6, "total": 6, "memory": "on"}
+{"ts": "2026-10-27T17:23:14.611", "event": "memory_read", "table": "approvals", "detail": "1 pending"}
+{"ts": "2026-10-27T17:23:14.612", "event": "memory_read", "table": "generated_test_suites", "detail": "current: d24a86b2"}
+{"ts": "2026-10-27T17:23:14.619", "event": "memory_write", "table": "approvals", "detail": "129fb2a3 APPROVED"}
+{"ts": "2026-10-27T17:23:14.620", "event": "approval_decided", "approval_id": "129fb2a3", "decision": "approved"}
+{"ts": "2026-10-27T17:23:14.684", "event": "memory_read", "table": "spec_baselines", "detail": "latest version: 8"}
+{"ts": "2026-10-27T17:23:14.690", "event": "memory_write", "table": "spec_baselines", "detail": "v9 (8877a5d861c8)"}
+{"ts": "2026-10-27T17:23:14.691", "event": "spec_baseline_created", "version": 9, "spec_hash": "8877a5d861c8"}
+{"ts": "2026-10-27T17:23:14.692", "event": "memory_read", "table": "generated_test_suites", "detail": "current: d24a86b2"}
+{"ts": "2026-10-27T17:23:14.693", "event": "memory_read", "table": "test_runs", "detail": "last run: nogit-280193cbdd"}
+{"ts": "2026-10-27T17:23:14.694", "event": "onboard", "action": "generate", "commit_sha": "nogit-280193cbdded", "spec_version": 9}
+{"ts": "2026-10-27T17:23:14.697", "event": "memory_read", "table": "generated_test_suites", "detail": "current: d24a86b2"}
+{"ts": "2026-10-27T17:23:14.698", "event": "memory_read", "table": "lessons", "detail": "1 approved lessons"}
+{"ts": "2026-10-27T17:23:14.701", "event": "tests_generated", "attempt": 1, "provider": "stub", "valid": true, "problem": "", "used_previous_suite": true, "lessons": 1}
+{"ts": "2026-10-27T17:23:14.708", "event": "memory_write", "table": "generated_test_suites", "detail": "new CURRENT 2c4d8ab5; previous SUPERSEDED"}
+{"ts": "2026-10-27T17:23:14.710", "event": "memory_read", "table": "generated_test_suites", "detail": "current: 2c4d8ab5"}
+{"ts": "2026-10-27T17:23:17.095", "event": "tests_executed", "exit_code": 0, "total": 6, "passed": 6, "failed": 0}
+{"ts": "2026-10-27T17:23:17.103", "event": "memory_write", "table": "test_runs", "detail": "run 9dc734ee: 6/6 passed"}
+{"ts": "2026-10-27T17:23:17.105", "event": "email_skipped", "reason": "email_on=failure"}
+{"ts": "2026-10-27T17:23:17.106", "event": "run_finished", "seconds": 2.5, "action": "generate", "passed": 6, "total": 6, "memory": "on"}
+{"ts": "2026-10-27T17:23:17.177", "event": "memory_read", "table": "spec_baselines", "detail": "latest version: 9"}
+{"ts": "2026-10-27T17:23:17.178", "event": "memory_read", "table": "generated_test_suites", "detail": "current: 2c4d8ab5"}
+{"ts": "2026-10-27T17:23:17.179", "event": "memory_read", "table": "test_runs", "detail": "last run: nogit-280193cbdd"}
+{"ts": "2026-10-27T17:23:17.180", "event": "onboard", "action": "rerun", "commit_sha": "nogit-4ddc2fb2aaf6", "spec_version": 9}
+{"ts": "2026-10-27T17:23:17.182", "event": "memory_read", "table": "generated_test_suites", "detail": "current: 2c4d8ab5"}
+{"ts": "2026-10-27T17:23:19.860", "event": "tests_executed", "exit_code": 1, "total": 6, "passed": 5, "failed": 1}
+{"ts": "2026-10-27T17:23:19.863", "event": "memory_read", "table": "generated_test_suites", "detail": "current: 2c4d8ab5"}
+{"ts": "2026-10-27T17:23:19.864", "event": "memory_read", "table": "test_runs", "detail": "3 recent runs"}
+{"ts": "2026-10-27T17:23:19.865", "event": "memory_read", "table": "lessons", "detail": "1 approved lessons"}
+{"ts": "2026-10-27T17:23:19.878", "event": "agent_tool", "tool": "read_file", "result": "src/calculator.py (lines 1-16 of 16)"}
+{"ts": "2026-10-27T17:23:19.883", "event": "agent_tool", "tool": "read_file", "result": "src/calculator.py (lines 1-16 of 16)"}
+{"ts": "2026-10-27T17:23:19.886", "event": "agent_tool", "tool": "read_file", "result": "src/calculator.py (lines 1-16 of 16)"}
+{"ts": "2026-10-27T17:23:19.889", "event": "agent_tool", "tool": "read_file", "result": "src/calculator.py (lines 1-16 of 16)"}
+{"ts": "2026-10-27T17:23:19.892", "event": "agent_tool", "tool": "read_file", "result": "src/calculator.py (lines 1-16 of 16)"}
+{"ts": "2026-10-27T17:23:19.896", "event": "agent_tool", "tool": "read_file", "result": "src/calculator.py (lines 1-16 of 16)"}
+{"ts": "2026-10-27T17:23:19.899", "event": "agent_tool", "tool": "read_file", "result": "src/calculator.py (lines 1-16 of 16)"}
+{"ts": "2026-10-27T17:23:19.902", "event": "agent_tool", "tool": "read_file", "result": "src/calculator.py (lines 1-16 of 16)"}
+{"ts": "2026-10-27T17:23:19.905", "event": "agent_tool", "tool": "read_file", "result": "src/calculator.py (lines 1-16 of 16)"}
+{"ts": "2026-10-27T17:23:19.908", "event": "agent_tool", "tool": "read_file", "result": "src/calculator.py (lines 1-16 of 16)"}
+{"ts": "2026-10-27T17:23:19.910", "event": "agent_tool", "tool": "read_file", "result": "src/calculator.py (lines 1-16 of 16)"}
+{"ts": "2026-10-27T17:23:19.913", "event": "agent_tool", "tool": "finish", "result": "Recorded."}
+{"ts": "2026-10-27T17:23:19.914", "event": "investigated", "steps": 12, "repairs": 0, "error": ""}
+{"ts": "2026-10-27T17:23:19.926", "event": "memory_write", "table": "test_runs", "detail": "run 072928b6: 5/6 passed"}
+{"ts": "2026-10-27T17:23:19.928", "event": "memory_read", "table": "test_runs", "detail": "report already delivered for nogit-4ddc2f: False"}
+{"ts": "2026-10-27T17:23:19.936", "event": "memory_write", "table": "notifications", "detail": "saved_to_outbox -> (outbox)"}
+{"ts": "2026-10-27T17:23:19.943", "event": "memory_write", "table": "test_runs", "detail": "run 072928b6 report delivered"}
+{"ts": "2026-10-27T17:23:19.944", "event": "email_sent", "channel": "outbox", "to": ""}
+{"ts": "2026-10-27T17:23:19.947", "event": "run_finished", "seconds": 2.8, "action": "rerun", "passed": 5, "total": 6, "memory": "on"}
+{"ts": "2026-10-27T17:23:20.005", "event": "memory_read", "table": "spec_baselines", "detail": "latest version: 9"}
+{"ts": "2026-10-27T17:23:20.006", "event": "memory_read", "table": "generated_test_suites", "detail": "current: 2c4d8ab5"}
+{"ts": "2026-10-27T17:23:20.007", "event": "memory_read", "table": "test_runs", "detail": "last run: nogit-4ddc2fb2aa"}
+{"ts": "2026-10-27T17:23:20.008", "event": "onboard", "action": "rerun", "commit_sha": "nogit-95c6f4b16529", "spec_version": 9}
+{"ts": "2026-10-27T17:23:20.010", "event": "memory_read", "table": "generated_test_suites", "detail": "current: 2c4d8ab5"}
+{"ts": "2026-10-27T17:23:22.838", "event": "tests_executed", "exit_code": 1, "total": 6, "passed": 5, "failed": 1}
+{"ts": "2026-10-27T17:23:22.840", "event": "memory_read", "table": "generated_test_suites", "detail": "current: 2c4d8ab5"}
+{"ts": "2026-10-27T17:23:22.842", "event": "memory_read", "table": "test_runs", "detail": "3 recent runs"}
+{"ts": "2026-10-27T17:23:22.843", "event": "memory_read", "table": "lessons", "detail": "1 approved lessons"}
+{"ts": "2026-10-27T17:23:22.857", "event": "agent_tool", "tool": "apply_patch", "result": "REJECTED: not a tool"}
+{"ts": "2026-10-27T17:23:22.859", "event": "agent_tool", "tool": "edit_tests", "result": "REJECTED: `old` must occur exactly once in the test file (found 0 times). Copy it exactly from the file, or use write_tests."}
+{"ts": "2026-10-27T17:23:22.862", "event": "agent_tool", "tool": "finish", "result": "Recorded."}
+{"ts": "2026-10-27T17:23:22.863", "event": "investigated", "steps": 3, "repairs": 0, "error": ""}
+{"ts": "2026-10-27T17:23:22.876", "event": "memory_write", "table": "test_runs", "detail": "run da17095a: 5/6 passed"}
+{"ts": "2026-10-27T17:23:22.878", "event": "memory_read", "table": "test_runs", "detail": "report already delivered for nogit-95c6f4: False"}
+{"ts": "2026-10-27T17:23:22.885", "event": "memory_write", "table": "notifications", "detail": "saved_to_outbox -> (outbox)"}
+{"ts": "2026-10-27T17:23:22.891", "event": "memory_write", "table": "test_runs", "detail": "run da17095a report delivered"}
+{"ts": "2026-10-27T17:23:22.892", "event": "email_sent", "channel": "outbox", "to": ""}
+{"ts": "2026-10-27T17:23:22.893", "event": "run_finished", "seconds": 2.9, "action": "rerun", "passed": 5, "total": 6, "memory": "on"}
+{"ts": "2026-10-27T17:23:25.910", "event": "memory_read", "table": "spec_baselines", "detail": "latest version: 9"}
+{"ts": "2026-10-27T17:23:25.911", "event": "memory_read", "table": "generated_test_suites", "detail": "current: 2c4d8ab5"}
+{"ts": "2026-10-27T17:23:25.912", "event": "memory_read", "table": "test_runs", "detail": "last run: nogit-95c6f4b165"}
+{"ts": "2026-10-27T17:23:25.913", "event": "onboard", "action": "rerun", "commit_sha": "nogit-603eb9bbbe3a", "spec_version": 9}
+{"ts": "2026-10-27T17:23:25.915", "event": "memory_read", "table": "generated_test_suites", "detail": "current: 2c4d8ab5"}
+{"ts": "2026-10-27T17:23:28.492", "event": "tests_executed", "exit_code": 0, "total": 6, "passed": 6, "failed": 0}
+{"ts": "2026-10-27T17:23:28.499", "event": "memory_write", "table": "test_runs", "detail": "run b79fbb3a: 6/6 passed"}
+{"ts": "2026-10-27T17:23:28.501", "event": "memory_read", "table": "test_runs", "detail": "report already delivered for nogit-603eb9: False"}
+{"ts": "2026-10-27T17:23:28.507", "event": "memory_write", "table": "notifications", "detail": "failed -> owner@test.local"}
+{"ts": "2026-10-27T17:23:28.508", "event": "email_failed", "detail": "simulated SMTP outage"}
+{"ts": "2026-10-27T17:23:28.510", "event": "run_finished", "seconds": 2.6, "action": "rerun", "passed": 6, "total": 6, "memory": "on"}
+{"ts": "2026-10-27T17:23:28.572", "event": "memory_read", "table": "spec_baselines", "detail": "latest version: 9"}
+{"ts": "2026-10-27T17:23:28.573", "event": "memory_read", "table": "generated_test_suites", "detail": "current: 2c4d8ab5"}
+{"ts": "2026-10-27T17:23:28.574", "event": "memory_read", "table": "test_runs", "detail": "last run: nogit-603eb9bbbe"}
+{"ts": "2026-10-27T17:23:28.575", "event": "onboard", "action": "report_only", "commit_sha": "nogit-603eb9bbbe3a", "spec_version": 9}
+{"ts": "2026-10-27T17:23:28.577", "event": "memory_read", "table": "test_runs", "detail": "report already delivered for nogit-603eb9: False"}
+{"ts": "2026-10-27T17:23:28.583", "event": "memory_write", "table": "notifications", "detail": "sent -> owner@test.local"}
+{"ts": "2026-10-27T17:23:28.589", "event": "memory_write", "table": "test_runs", "detail": "run b79fbb3a report delivered"}
+{"ts": "2026-10-27T17:23:28.590", "event": "email_sent", "channel": "smtp", "to": "owner@test.local"}
+{"ts": "2026-10-27T17:23:28.591", "event": "run_finished", "seconds": 0.1, "action": "report_only", "passed": 6, "total": 6, "memory": "on"}
+{"ts": "2026-10-27T17:23:28.645", "event": "memory_read", "table": "spec_baselines", "detail": "latest version: 9"}
+{"ts": "2026-10-27T17:23:28.646", "event": "memory_read", "table": "generated_test_suites", "detail": "current: 2c4d8ab5"}
+{"ts": "2026-10-27T17:23:28.647", "event": "memory_read", "table": "test_runs", "detail": "last run: nogit-603eb9bbbe"}
+{"ts": "2026-10-27T17:23:28.647", "event": "onboard", "action": "noop", "commit_sha": "nogit-603eb9bbbe3a", "spec_version": 9}
+{"ts": "2026-10-27T17:23:28.648", "event": "run_finished", "seconds": 0.0, "action": "noop", "passed": null, "total": null, "memory": "on"}
+{"ts": "2026-10-27T17:23:28.714", "event": "memory_read", "table": "spec_baselines", "detail": "latest version: 9"}
+{"ts": "2026-10-27T17:23:28.722", "event": "memory_write", "table": "spec_baselines", "detail": "v10 (8539f99fbb78)"}
+{"ts": "2026-10-27T17:23:28.723", "event": "spec_baseline_created", "version": 10, "spec_hash": "8539f99fbb78"}
+{"ts": "2026-10-27T17:23:28.724", "event": "memory_read", "table": "generated_test_suites", "detail": "current: 2c4d8ab5"}
+{"ts": "2026-10-27T17:23:28.725", "event": "memory_read", "table": "test_runs", "detail": "last run: nogit-603eb9bbbe"}
+{"ts": "2026-10-27T17:23:28.726", "event": "onboard", "action": "generate", "commit_sha": "nogit-280193cbdded", "spec_version": 10}
+{"ts": "2026-10-27T17:23:28.729", "event": "memory_read", "table": "generated_test_suites", "detail": "current: 2c4d8ab5"}
+{"ts": "2026-10-27T17:23:28.730", "event": "memory_read", "table": "lessons", "detail": "1 approved lessons"}
+{"ts": "2026-10-27T17:23:28.732", "event": "tests_generated", "attempt": 1, "provider": "stub", "valid": true, "problem": "", "used_previous_suite": true, "lessons": 1}
+{"ts": "2026-10-27T17:23:28.749", "event": "memory_write", "table": "generated_test_suites", "detail": "new CURRENT f3a12785; previous SUPERSEDED"}
+{"ts": "2026-10-27T17:23:28.750", "event": "memory_read", "table": "generated_test_suites", "detail": "current: f3a12785"}
+{"ts": "2026-10-27T17:23:31.394", "event": "tests_executed", "exit_code": 1, "total": 7, "passed": 6, "failed": 1}
+{"ts": "2026-10-27T17:23:31.396", "event": "memory_read", "table": "generated_test_suites", "detail": "current: f3a12785"}
+{"ts": "2026-10-27T17:23:31.398", "event": "memory_read", "table": "test_runs", "detail": "3 recent runs"}
+{"ts": "2026-10-27T17:23:31.399", "event": "memory_read", "table": "lessons", "detail": "1 approved lessons"}
+{"ts": "2026-10-27T17:23:31.441", "event": "agent_tool", "tool": "edit_tests", "result": "ACCEPTED: test file updated. Call run_tests to verify."}
+{"ts": "2026-10-27T17:23:33.861", "event": "agent_tool", "tool": "run_tests", "result": "7/7 passed; failing: none"}
+{"ts": "2026-10-27T17:23:33.865", "event": "agent_tool", "tool": "finish", "result": "Recorded."}
+{"ts": "2026-10-27T17:23:33.868", "event": "investigated", "steps": 3, "repairs": 1, "error": ""}
+{"ts": "2026-10-27T17:23:33.875", "event": "memory_write", "table": "generated_test_suites", "detail": "new CURRENT 80c9f8f0; previous SUPERSEDED"}
+{"ts": "2026-10-27T17:23:33.882", "event": "memory_write", "table": "approvals", "detail": "test_repair ea7d4ad0 PENDING"}
+{"ts": "2026-10-27T17:23:33.889", "event": "memory_write", "table": "lessons", "detail": "test_divide_nine (PENDING)"}
+{"ts": "2026-10-27T17:23:33.890", "event": "approval_requested", "approval_id": "ea7d4ad0", "kind": "test_repair", "tests": "test_divide_nine"}
+{"ts": "2026-10-27T17:23:33.892", "event": "memory_read", "table": "generated_test_suites", "detail": "current: 80c9f8f0"}
+{"ts": "2026-10-27T17:23:37.251", "event": "tests_executed", "exit_code": 0, "total": 7, "passed": 7, "failed": 0}
+{"ts": "2026-10-27T17:23:37.259", "event": "memory_write", "table": "test_runs", "detail": "run 23c8595d: 7/7 passed"}
+{"ts": "2026-10-27T17:23:37.268", "event": "memory_read", "table": "test_runs", "detail": "report already delivered for nogit-280193: False"}
+{"ts": "2026-10-27T17:23:37.276", "event": "memory_write", "table": "notifications", "detail": "saved_to_outbox -> (outbox)"}
+{"ts": "2026-10-27T17:23:37.283", "event": "memory_write", "table": "test_runs", "detail": "run 23c8595d report delivered"}
+{"ts": "2026-10-27T17:23:37.284", "event": "email_sent", "channel": "outbox", "to": ""}
+{"ts": "2026-10-27T17:23:37.286", "event": "run_finished", "seconds": 8.6, "action": "generate", "passed": 7, "total": 7, "memory": "on"}
+{"ts": "2026-10-27T17:23:37.302", "event": "memory_read", "table": "approvals", "detail": "1 pending"}
+{"ts": "2026-10-27T17:23:37.304", "event": "memory_read", "table": "generated_test_suites", "detail": "current: 80c9f8f0"}
+{"ts": "2026-10-27T17:23:37.313", "event": "memory_write", "table": "approvals", "detail": "ea7d4ad0 REJECTED"}
+{"ts": "2026-10-27T17:23:37.321", "event": "memory_write", "table": "generated_test_suites", "detail": "new CURRENT 6ab0bb8e; previous SUPERSEDED"}
+{"ts": "2026-10-27T17:23:37.322", "event": "approval_decided", "approval_id": "ea7d4ad0", "decision": "rejected"}
+{"ts": "2026-10-27T17:23:37.410", "event": "memory_read", "table": "spec_baselines", "detail": "latest version: 10"}
+{"ts": "2026-10-27T17:23:37.411", "event": "memory_read", "table": "generated_test_suites", "detail": "current: 6ab0bb8e"}
+{"ts": "2026-10-27T17:23:37.413", "event": "memory_read", "table": "test_runs", "detail": "last run: nogit-280193cbdd"}
+{"ts": "2026-10-27T17:23:37.414", "event": "onboard", "action": "rerun", "commit_sha": "nogit-280193cbdded", "spec_version": 10}
+{"ts": "2026-10-27T17:23:37.416", "event": "memory_read", "table": "generated_test_suites", "detail": "current: 6ab0bb8e"}
+{"ts": "2026-10-27T17:23:40.652", "event": "tests_executed", "exit_code": 1, "total": 7, "passed": 6, "failed": 1}
+{"ts": "2026-10-27T17:23:40.654", "event": "memory_read", "table": "generated_test_suites", "detail": "current: 6ab0bb8e"}
+{"ts": "2026-10-27T17:23:40.656", "event": "memory_read", "table": "test_runs", "detail": "3 recent runs"}
+{"ts": "2026-10-27T17:23:40.657", "event": "memory_read", "table": "lessons", "detail": "1 approved lessons"}
+{"ts": "2026-10-27T17:23:40.675", "event": "agent_tool", "tool": "read_file", "result": "src/calculator.py (lines 1-16 of 16)"}
+{"ts": "2026-10-27T17:23:40.679", "event": "agent_tool", "tool": "finish", "result": "Recorded."}
+{"ts": "2026-10-27T17:23:40.681", "event": "investigated", "steps": 2, "repairs": 0, "error": ""}
+{"ts": "2026-10-27T17:23:40.711", "event": "memory_write", "table": "test_runs", "detail": "run 5688e107: 6/7 passed"}
+{"ts": "2026-10-27T17:23:40.714", "event": "memory_read", "table": "test_runs", "detail": "report already delivered for nogit-280193: False"}
+{"ts": "2026-10-27T17:23:40.721", "event": "memory_write", "table": "notifications", "detail": "saved_to_outbox -> (outbox)"}
+{"ts": "2026-10-27T17:23:40.726", "event": "memory_write", "table": "test_runs", "detail": "run 5688e107 report delivered"}
+{"ts": "2026-10-27T17:23:40.728", "event": "email_sent", "channel": "outbox", "to": ""}
+{"ts": "2026-10-27T17:23:40.729", "event": "run_finished", "seconds": 3.4, "action": "rerun", "passed": 6, "total": 7, "memory": "on"}

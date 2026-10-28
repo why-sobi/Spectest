@@ -1,5 +1,7 @@
-langgraph>=1.0
-openai>=1.40
-pytest>=8.0
-python-dotenv>=1.0
-watchdog>=4.0
+# Direct dependencies, pinned to the versions SpecTest was developed and evaluated with (Python 3.13.0).
+# The full resolved set is in requirements-lock.txt.
+langgraph==1.2.16
+openai==3.37.0
+pytest==9.1.1
+python-dotenv==1.2.4
+watchdog==6.0.0

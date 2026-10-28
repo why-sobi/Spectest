@@ -32,6 +32,8 @@ GENERATE_TIMEOUT, CHAT_TIMEOUT = 180, 120  # seconds; large test files take a wh
 # request too large for its limits, bad key, retired model. 429s use Retry-After (see _record_failure).
 COOLDOWN_SECONDS = {413: 600, 401: 3600, 403: 3600, 404: 3600}
 _cooldown: dict[str, float] = {}
+# Set by main.run(): called after every provider call with provider, model, ok, latency and token usage.
+on_call = None
 
 GENERATE_PROMPT = """Write pytest tests for the Python project described below.
 
@@ -41,11 +43,13 @@ Rules:
 - Import the code under test using the module paths listed in the signatures (e.g. `from src.calculator import add`).
 - <signatures> lists the public API with docstrings. Docstrings are developer notes: use them to understand
   parameters and intent, but if a docstring conflicts with the spec, the spec wins.
-- Allowed imports: pytest, math, decimal, fractions, re, datetime, base64, io, json, types, collections, itertools,
-  functools, dataclasses, typing, enum, string, the project's own modules{extra_imports}. Nothing else.
+- Allowed imports: {allowed_imports}, the project's own modules{extra_imports}. Nothing else
+  (in particular no os, sys, subprocess, shutil, socket or network libraries).
 - Do not use eval, exec, open/io.open, or network access. For files, use pytest's `tmp_path` fixture
   (`path.write_text(...)`, `path.read_text()`).
 - Use pytest.approx for float comparisons.
+- Use only the public API listed in <signatures> and build real objects with the fields shown there.
+  Do not mock or patch the project's own internals, and do not assume private methods exist.
 
 Return the complete test file as a single ```python code block.
 
@@ -101,18 +105,29 @@ def _record_failure(name: str, exc: Exception):
         print(f"[spectest] {name} unavailable (HTTP {status}); skipping it for {int(seconds)}s", file=sys.stderr)
 
 
+def _report_call(provider, model, ok, started, prompt_tokens=None, completion_tokens=None, error=""):
+    if on_call:
+        on_call(provider=provider, model=model, ok=ok, latency_ms=round((time.perf_counter() - started) * 1000),
+                prompt_tokens=prompt_tokens, completion_tokens=completion_tokens, error=error)
+
+
 def _call(messages: list[dict], timeout: int, skip: set[str] = frozenset(), **kwargs):
     """Try providers in order. Returns (message, provider, errors from providers that failed first)."""
     errors = []
     for name, base_url, key_var, model_var, default_model in _providers():
         if name in skip:
             continue
+        model = os.getenv(model_var) or default_model
+        started = time.perf_counter()
         try:
             client = OpenAI(base_url=base_url, api_key=os.getenv(key_var), timeout=timeout, max_retries=1)
-            resp = client.chat.completions.create(model=os.getenv(model_var) or default_model, messages=messages,
-                                                  temperature=0.1, **kwargs)
+            resp = client.chat.completions.create(model=model, messages=messages, temperature=0.1, **kwargs)
+            usage = getattr(resp, "usage", None)
+            _report_call(name, model, True, started, getattr(usage, "prompt_tokens", None),
+                         getattr(usage, "completion_tokens", None))
             return resp.choices[0].message, name, errors
         except Exception as e:  # any provider failure -> try the next one with the same messages
+            _report_call(name, model, False, started, error=f"{type(e).__name__}: {str(e)[:200]}")
             _record_failure(name, e)
             errors.append(f"{name}: {type(e).__name__}: {e}")
     raise LLMError("All LLM providers failed or none configured:\n" + "\n".join(errors or ["no API keys set"]))
@@ -189,8 +204,10 @@ def generate_tests(spec: str, signatures: str, feedback: str = "", instructions:
     if feedback:
         feedback = f"\nYour previous attempt was rejected: {feedback}\nFix this and return the full file again."
     extra = f", and {', '.join(sorted(allow_imports))}" if allow_imports else ""
+    from spectest.tools.test_runner import ALLOWED_IMPORTS  # the prompt lists exactly what the validator accepts
     prompt = GENERATE_PROMPT.format(signatures=signatures, spec=spec, memory=memory, instructions=instructions,
-                                    feedback=feedback, extra_imports=extra)
+                                    feedback=feedback, extra_imports=extra,
+                                    allowed_imports=", ".join(sorted(ALLOWED_IMPORTS - {"__future__"})))
     return complete_code(prompt)
 
 

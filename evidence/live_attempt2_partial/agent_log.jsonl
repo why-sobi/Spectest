@@ -1,0 +1,71 @@
+{"ts": "2026-10-27T16:48:49.331", "event": "memory_read", "table": "spec_baselines", "detail": "latest version: none"}
+{"ts": "2026-10-27T16:48:49.337", "event": "memory_write", "table": "spec_baselines", "detail": "v1 (e1f98edb708c)"}
+{"ts": "2026-10-27T16:48:49.338", "event": "spec_baseline_created", "version": 1, "spec_hash": "e1f98edb708c"}
+{"ts": "2026-10-27T16:48:49.339", "event": "memory_read", "table": "generated_test_suites", "detail": "current: none"}
+{"ts": "2026-10-27T16:48:49.340", "event": "memory_read", "table": "test_runs", "detail": "last run: none"}
+{"ts": "2026-10-27T16:48:49.341", "event": "onboard", "action": "generate", "commit_sha": "nogit-184514945f52", "spec_version": 1}
+{"ts": "2026-10-27T16:48:49.380", "event": "memory_read", "table": "generated_test_suites", "detail": "current: none"}
+{"ts": "2026-10-27T16:48:49.381", "event": "memory_read", "table": "lessons", "detail": "0 approved lessons"}
+{"ts": "2026-10-27T16:48:59.198", "event": "llm_call", "provider": "groq", "model": "openai/gpt-oss-120b", "ok": true, "latency_ms": 9816, "prompt_tokens": 3324, "completion_tokens": 3072, "error": ""}
+{"ts": "2026-10-27T16:50:06.067", "event": "llm_call", "provider": "gemini", "model": "gemini-2.5-flash", "ok": true, "latency_ms": 66865, "prompt_tokens": 3699, "completion_tokens": 7257, "error": ""}
+{"ts": "2026-10-27T16:50:06.094", "event": "tests_generated", "attempt": 1, "provider": "gemini", "valid": true, "problem": "", "used_previous_suite": false, "lessons": 0}
+{"ts": "2026-10-27T16:50:06.103", "event": "memory_write", "table": "generated_test_suites", "detail": "new CURRENT 3b05e168; previous SUPERSEDED"}
+{"ts": "2026-10-27T16:50:06.105", "event": "memory_read", "table": "generated_test_suites", "detail": "current: 3b05e168"}
+{"ts": "2026-10-27T16:50:11.457", "event": "tests_executed", "exit_code": 1, "total": 70, "passed": 50, "failed": 20}
+{"ts": "2026-10-27T16:50:11.459", "event": "memory_read", "table": "generated_test_suites", "detail": "current: 3b05e168"}
+{"ts": "2026-10-27T16:50:11.463", "event": "memory_read", "table": "test_runs", "detail": "0 recent runs"}
+{"ts": "2026-10-27T16:50:11.464", "event": "memory_read", "table": "lessons", "detail": "0 approved lessons"}
+{"ts": "2026-10-27T16:50:12.261", "event": "llm_call", "provider": "groq", "model": "openai/gpt-oss-120b", "ok": false, "latency_ms": 788, "prompt_tokens": null, "completion_tokens": null, "error": "APIStatusError: Error code: 413 - {'error': {'message': 'Request too large for model `openai/gpt-oss-120b` in organization `org_01jz0qh94wftsszrwdn2bnw8cy` service tier `on_demand` on tokens per minute (TPM): Limit 8"}
+{"ts": "2026-10-27T16:50:18.643", "event": "llm_call", "provider": "gemini", "model": "gemini-2.5-flash", "ok": false, "latency_ms": 6382, "prompt_tokens": null, "completion_tokens": null, "error": "InternalServerError: Error code: 503 - [{'error': {'code': 503, 'message': 'This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.', 'status': 'UNAVAILABLE'}}]"}
+{"ts": "2026-10-27T16:50:24.528", "event": "llm_call", "provider": "openrouter", "model": "openai/gpt-oss-120b", "ok": true, "latency_ms": 5884, "prompt_tokens": 9417, "completion_tokens": 78, "error": ""}
+{"ts": "2026-10-27T16:50:24.554", "event": "agent_tool", "tool": "list_files", "result": "incidentzero/__init__.py"}
+{"ts": "2026-10-27T16:50:27.535", "event": "llm_call", "provider": "gemini", "model": "gemini-2.5-flash", "ok": true, "latency_ms": 2980, "prompt_tokens": 12008, "completion_tokens": 75, "error": ""}
+{"ts": "2026-10-27T16:50:27.538", "event": "agent_tool", "tool": "read_file", "result": "incidentzero/agent/policies.py (lines 15-22 of 78)"}
+{"ts": "2026-10-27T16:50:27.540", "event": "agent_tool", "tool": "read_file", "result": "incidentzero/domain/models.py (lines 1-20 of 54)"}
+{"ts": "2026-10-27T16:50:32.202", "event": "llm_call", "provider": "gemini", "model": "gemini-2.5-flash", "ok": true, "latency_ms": 4660, "prompt_tokens": 12548, "completion_tokens": 299, "error": ""}
+{"ts": "2026-10-27T16:50:32.268", "event": "agent_tool", "tool": "edit_tests", "result": "REJECTED: No existing test was changed"}
+{"ts": "2026-10-27T16:50:37.840", "event": "llm_call", "provider": "gemini", "model": "gemini-2.5-flash", "ok": true, "latency_ms": 5571, "prompt_tokens": 12871, "completion_tokens": 274, "error": ""}
+{"ts": "2026-10-27T16:50:37.915", "event": "agent_tool", "tool": "edit_tests", "result": "REJECTED: No existing test was changed"}
+{"ts": "2026-10-27T16:50:45.675", "event": "llm_call", "provider": "gemini", "model": "gemini-2.5-flash", "ok": true, "latency_ms": 7757, "prompt_tokens": 13169, "completion_tokens": 333, "error": ""}
+{"ts": "2026-10-27T16:50:45.794", "event": "agent_tool", "tool": "edit_tests", "result": "REJECTED: No existing test was changed"}
+{"ts": "2026-10-27T16:50:49.209", "event": "llm_call", "provider": "gemini", "model": "gemini-2.5-flash", "ok": true, "latency_ms": 3413, "prompt_tokens": 13526, "completion_tokens": 45, "error": ""}
+{"ts": "2026-10-27T16:50:49.212", "event": "agent_tool", "tool": "read_file", "result": "spectest_tests/test_incidentzero_spec.py (lines 298-305 of 621)"}
+{"ts": "2026-10-27T16:50:53.394", "event": "llm_call", "provider": "gemini", "model": "gemini-2.5-flash", "ok": true, "latency_ms": 4180, "prompt_tokens": 13795, "completion_tokens": 274, "error": ""}
+{"ts": "2026-10-27T16:50:53.472", "event": "agent_tool", "tool": "edit_tests", "result": "REJECTED: No existing test was changed"}
+{"ts": "2026-10-27T16:50:56.724", "event": "llm_call", "provider": "gemini", "model": "gemini-2.5-flash", "ok": true, "latency_ms": 3250, "prompt_tokens": 14093, "completion_tokens": 274, "error": ""}
+{"ts": "2026-10-27T16:50:56.788", "event": "agent_tool", "tool": "edit_tests", "result": "REJECTED: No existing test was changed"}
+{"ts": "2026-10-27T16:50:59.931", "event": "llm_call", "provider": "gemini", "model": "gemini-2.5-flash", "ok": true, "latency_ms": 3141, "prompt_tokens": 14391, "completion_tokens": 45, "error": ""}
+{"ts": "2026-10-27T16:50:59.933", "event": "agent_tool", "tool": "read_file", "result": "spectest_tests/test_incidentzero_spec.py (lines 291-297 of 621)"}
+{"ts": "2026-10-27T16:51:03.346", "event": "llm_call", "provider": "gemini", "model": "gemini-2.5-flash", "ok": true, "latency_ms": 3411, "prompt_tokens": 14607, "completion_tokens": 274, "error": ""}
+{"ts": "2026-10-27T16:51:03.476", "event": "agent_tool", "tool": "edit_tests", "result": "REJECTED: No existing test was changed"}
+{"ts": "2026-10-27T16:51:08.156", "event": "llm_call", "provider": "gemini", "model": "gemini-2.5-flash", "ok": true, "latency_ms": 4678, "prompt_tokens": 14934, "completion_tokens": 45, "error": ""}
+{"ts": "2026-10-27T16:51:08.159", "event": "agent_tool", "tool": "read_file", "result": "spectest_tests/test_incidentzero_spec.py (lines 290-297 of 621)"}
+{"ts": "2026-10-27T16:51:36.098", "event": "llm_call", "provider": "gemini", "model": "gemini-2.5-flash", "ok": true, "latency_ms": 27937, "prompt_tokens": 15186, "completion_tokens": 3244, "error": ""}
+{"ts": "2026-10-27T16:51:36.101", "event": "agent_tool", "tool": "finish", "result": "Recorded."}
+{"ts": "2026-10-27T16:51:36.102", "event": "investigated", "steps": 12, "repairs": 0, "error": ""}
+{"ts": "2026-10-27T16:51:36.145", "event": "memory_write", "table": "test_runs", "detail": "run c642c063: 50/70 passed"}
+{"ts": "2026-10-27T16:51:36.147", "event": "memory_read", "table": "test_runs", "detail": "report already delivered for nogit-184514: False"}
+{"ts": "2026-10-27T16:51:36.156", "event": "memory_write", "table": "notifications", "detail": "saved_to_outbox -> (outbox)"}
+{"ts": "2026-10-27T16:51:36.163", "event": "memory_write", "table": "test_runs", "detail": "run c642c063 report delivered"}
+{"ts": "2026-10-27T16:51:36.164", "event": "email_sent", "channel": "outbox", "to": ""}
+{"ts": "2026-10-27T16:51:36.165", "event": "run_finished", "seconds": 166.9, "action": "generate", "passed": 50, "total": 70, "memory": "on"}
+{"ts": "2026-10-27T16:51:43.457", "event": "memory_read", "table": "spec_baselines", "detail": "latest version: 1"}
+{"ts": "2026-10-27T16:51:43.458", "event": "memory_read", "table": "generated_test_suites", "detail": "current: 3b05e168"}
+{"ts": "2026-10-27T16:51:43.459", "event": "memory_read", "table": "test_runs", "detail": "last run: nogit-184514945f"}
+{"ts": "2026-10-27T16:51:43.460", "event": "onboard", "action": "rerun", "commit_sha": "nogit-639abb895ce8", "spec_version": 1}
+{"ts": "2026-10-27T16:51:43.462", "event": "memory_read", "table": "generated_test_suites", "detail": "current: 3b05e168"}
+{"ts": "2026-10-27T16:51:47.033", "event": "tests_executed", "exit_code": 1, "total": 70, "passed": 41, "failed": 29}
+{"ts": "2026-10-27T16:51:47.036", "event": "memory_read", "table": "generated_test_suites", "detail": "current: 3b05e168"}
+{"ts": "2026-10-27T16:51:47.042", "event": "memory_read", "table": "test_runs", "detail": "1 recent runs"}
+{"ts": "2026-10-27T16:51:47.043", "event": "memory_read", "table": "lessons", "detail": "0 approved lessons"}
+{"ts": "2026-10-27T16:51:49.069", "event": "llm_call", "provider": "groq", "model": "openai/gpt-oss-120b", "ok": false, "latency_ms": 2011, "prompt_tokens": null, "completion_tokens": null, "error": "APIStatusError: Error code: 413 - {'error': {'message': 'Request too large for model `openai/gpt-oss-120b` in organization `org_01jz0qh94wftsszrwdn2bnw8cy` service tier `on_demand` on tokens per minute (TPM): Limit 8"}
+{"ts": "2026-10-27T16:52:00.217", "event": "llm_call", "provider": "gemini", "model": "gemini-2.5-flash", "ok": true, "latency_ms": 11147, "prompt_tokens": 11940, "completion_tokens": 308, "error": ""}
+{"ts": "2026-10-27T16:52:00.220", "event": "agent_tool", "tool": "edit_tests", "result": "REJECTED: `old` must occur exactly once in the test file (found 5 times). Copy it exactly from the file, or use write_tests."}
+{"ts": "2026-10-27T16:52:04.510", "event": "llm_call", "provider": "gemini", "model": "gemini-2.5-flash", "ok": true, "latency_ms": 4288, "prompt_tokens": 12296, "completion_tokens": 27, "error": ""}
+{"ts": "2026-10-27T16:52:04.516", "event": "agent_tool", "tool": "read_file", "result": "spectest_tests/test_incidentzero_spec.py (lines 1-300 of 621)"}
+{"ts": "2026-10-27T16:52:10.130", "event": "llm_call", "provider": "gemini", "model": "gemini-2.5-flash", "ok": true, "latency_ms": 5613, "prompt_tokens": 17520, "completion_tokens": 43, "error": ""}
+{"ts": "2026-10-27T16:52:10.133", "event": "agent_tool", "tool": "read_file", "result": "spectest_tests/test_incidentzero_spec.py (lines 1-300 of 621)"}
+{"ts": "2026-10-27T16:52:14.174", "event": "llm_call", "provider": "gemini", "model": "gemini-2.5-flash", "ok": true, "latency_ms": 4039, "prompt_tokens": 22760, "completion_tokens": 27, "error": ""}
+{"ts": "2026-10-27T16:52:14.177", "event": "agent_tool", "tool": "read_file", "result": "spectest_tests/test_incidentzero_spec.py (lines 1-300 of 621)"}
+{"ts": "2026-10-27T16:52:20.305", "event": "llm_call", "provider": "gemini", "model": "gemini-2.5-flash", "ok": true, "latency_ms": 6126, "prompt_tokens": 27984, "completion_tokens": 27, "error": ""}
+{"ts": "2026-10-27T16:52:20.309", "event": "agent_tool", "tool": "read_file", "result": "spectest_tests/test_incidentzero_spec.py (lines 1-300 of 621)"}

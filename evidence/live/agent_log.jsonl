@@ -1,0 +1,187 @@
+{"ts": "2026-10-27T16:55:47.328", "event": "memory_read", "table": "spec_baselines", "detail": "latest version: none"}
+{"ts": "2026-10-27T16:55:47.339", "event": "memory_write", "table": "spec_baselines", "detail": "v1 (e1f98edb708c)"}
+{"ts": "2026-10-27T16:55:47.342", "event": "spec_baseline_created", "version": 1, "spec_hash": "e1f98edb708c"}
+{"ts": "2026-10-27T16:55:47.343", "event": "memory_read", "table": "generated_test_suites", "detail": "current: none"}
+{"ts": "2026-10-27T16:55:47.344", "event": "memory_read", "table": "test_runs", "detail": "last run: none"}
+{"ts": "2026-10-27T16:55:47.345", "event": "onboard", "action": "generate", "commit_sha": "nogit-184514945f52", "spec_version": 1}
+{"ts": "2026-10-27T16:55:47.387", "event": "memory_read", "table": "generated_test_suites", "detail": "current: none"}
+{"ts": "2026-10-27T16:55:47.388", "event": "memory_read", "table": "lessons", "detail": "0 approved lessons"}
+{"ts": "2026-10-27T16:55:55.862", "event": "llm_call", "provider": "groq", "model": "openai/gpt-oss-120b", "ok": true, "latency_ms": 8473, "prompt_tokens": 3944, "completion_tokens": 3011, "error": ""}
+{"ts": "2026-10-27T16:55:55.876", "event": "tests_generated", "attempt": 1, "provider": "groq", "valid": true, "problem": "", "used_previous_suite": false, "lessons": 0}
+{"ts": "2026-10-27T16:55:55.884", "event": "memory_write", "table": "generated_test_suites", "detail": "new CURRENT 6105f744; previous SUPERSEDED"}
+{"ts": "2026-10-27T16:55:55.886", "event": "memory_read", "table": "generated_test_suites", "detail": "current: 6105f744"}
+{"ts": "2026-10-27T16:55:58.305", "event": "tests_executed", "exit_code": 1, "total": 23, "passed": 22, "failed": 1}
+{"ts": "2026-10-27T16:55:58.307", "event": "memory_read", "table": "generated_test_suites", "detail": "current: 6105f744"}
+{"ts": "2026-10-27T16:55:58.314", "event": "memory_read", "table": "test_runs", "detail": "0 recent runs"}
+{"ts": "2026-10-27T16:55:58.315", "event": "memory_read", "table": "lessons", "detail": "0 approved lessons"}
+{"ts": "2026-10-27T16:56:32.069", "event": "llm_call", "provider": "groq", "model": "openai/gpt-oss-120b", "ok": true, "latency_ms": 33744, "prompt_tokens": 4844, "completion_tokens": 36, "error": ""}
+{"ts": "2026-10-27T16:56:32.119", "event": "agent_tool", "tool": "list_files", "result": ".gitignore"}
+{"ts": "2026-10-27T16:56:33.058", "event": "llm_call", "provider": "groq", "model": "openai/gpt-oss-120b", "ok": false, "latency_ms": 936, "prompt_tokens": null, "completion_tokens": null, "error": "APIStatusError: Error code: 413 - {'error': {'message': 'Request too large for model `openai/gpt-oss-120b` in organization `org_01jz0qh94wftsszrwdn2bnw8cy` service tier `on_demand` on tokens per minute (TPM): Limit 8"}
+{"ts": "2026-10-27T16:56:42.036", "event": "llm_call", "provider": "gemini", "model": "gemini-2.5-flash", "ok": true, "latency_ms": 8976, "prompt_tokens": 6141, "completion_tokens": 401, "error": ""}
+{"ts": "2026-10-27T16:56:42.210", "event": "agent_tool", "tool": "edit_tests", "result": "ACCEPTED: test file updated. Call run_tests to verify."}
+{"ts": "2026-10-27T16:56:44.597", "event": "llm_call", "provider": "gemini", "model": "gemini-2.5-flash", "ok": true, "latency_ms": 2386, "prompt_tokens": 6568, "completion_tokens": 27, "error": ""}
+{"ts": "2026-10-27T16:56:46.722", "event": "agent_tool", "tool": "run_tests", "result": "1/1 passed; failing: none"}
+{"ts": "2026-10-27T16:56:49.139", "event": "llm_call", "provider": "gemini", "model": "gemini-2.5-flash", "ok": false, "latency_ms": 2415, "prompt_tokens": null, "completion_tokens": null, "error": "RateLimitError: Error code: 429 - [{'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/g"}
+{"ts": "2026-10-27T16:56:56.525", "event": "llm_call", "provider": "openrouter", "model": "openai/gpt-oss-120b", "ok": true, "latency_ms": 7385, "prompt_tokens": 5584, "completion_tokens": 155, "error": ""}
+{"ts": "2026-10-27T16:56:56.527", "event": "investigated", "steps": 4, "repairs": 1, "error": ""}
+{"ts": "2026-10-27T16:56:56.540", "event": "memory_write", "table": "generated_test_suites", "detail": "new CURRENT 21a00ca9; previous SUPERSEDED"}
+{"ts": "2026-10-27T16:56:56.548", "event": "memory_write", "table": "approvals", "detail": "test_repair c9d2ef36 PENDING"}
+{"ts": "2026-10-27T16:56:56.555", "event": "memory_write", "table": "lessons", "detail": "test_agent_state_observe_result_updates (PENDING)"}
+{"ts": "2026-10-27T16:56:56.557", "event": "approval_requested", "approval_id": "c9d2ef36", "kind": "test_repair", "tests": "test_agent_state_observe_result_updates"}
+{"ts": "2026-10-27T16:56:56.560", "event": "memory_read", "table": "generated_test_suites", "detail": "current: 21a00ca9"}
+{"ts": "2026-10-27T16:56:58.584", "event": "tests_executed", "exit_code": 0, "total": 23, "passed": 23, "failed": 0}
+{"ts": "2026-10-27T16:56:58.593", "event": "memory_write", "table": "test_runs", "detail": "run c232ee1f: 23/23 passed"}
+{"ts": "2026-10-27T16:56:58.600", "event": "memory_read", "table": "test_runs", "detail": "report already delivered for nogit-184514: False"}
+{"ts": "2026-10-27T16:56:58.610", "event": "memory_write", "table": "notifications", "detail": "saved_to_outbox -> (outbox)"}
+{"ts": "2026-10-27T16:56:58.616", "event": "memory_write", "table": "test_runs", "detail": "run c232ee1f report delivered"}
+{"ts": "2026-10-27T16:56:58.617", "event": "email_sent", "channel": "outbox", "to": ""}
+{"ts": "2026-10-27T16:56:58.621", "event": "run_finished", "seconds": 71.4, "action": "generate", "passed": 23, "total": 23, "memory": "on"}
+{"ts": "2026-10-27T16:57:07.751", "event": "memory_read", "table": "spec_baselines", "detail": "latest version: 1"}
+{"ts": "2026-10-27T16:57:07.752", "event": "memory_read", "table": "generated_test_suites", "detail": "current: 21a00ca9"}
+{"ts": "2026-10-27T16:57:07.753", "event": "memory_read", "table": "test_runs", "detail": "last run: nogit-184514945f"}
+{"ts": "2026-10-27T16:57:07.754", "event": "onboard", "action": "rerun", "commit_sha": "nogit-639abb895ce8", "spec_version": 1}
+{"ts": "2026-10-27T16:57:07.757", "event": "memory_read", "table": "generated_test_suites", "detail": "current: 21a00ca9"}
+{"ts": "2026-10-27T16:57:10.418", "event": "tests_executed", "exit_code": 1, "total": 23, "passed": 20, "failed": 3}
+{"ts": "2026-10-27T16:57:10.419", "event": "memory_read", "table": "generated_test_suites", "detail": "current: 21a00ca9"}
+{"ts": "2026-10-27T16:57:10.423", "event": "memory_read", "table": "test_runs", "detail": "1 recent runs"}
+{"ts": "2026-10-27T16:57:10.424", "event": "memory_read", "table": "lessons", "detail": "0 approved lessons"}
+{"ts": "2026-10-27T16:57:12.746", "event": "llm_call", "provider": "groq", "model": "openai/gpt-oss-120b", "ok": true, "latency_ms": 2312, "prompt_tokens": 5203, "completion_tokens": 36, "error": ""}
+{"ts": "2026-10-27T16:57:12.775", "event": "agent_tool", "tool": "list_files", "result": ".gitignore"}
+{"ts": "2026-10-27T16:57:13.582", "event": "llm_call", "provider": "groq", "model": "openai/gpt-oss-120b", "ok": false, "latency_ms": 805, "prompt_tokens": null, "completion_tokens": null, "error": "APIStatusError: Error code: 413 - {'error': {'message': 'Request too large for model `openai/gpt-oss-120b` in organization `org_01jz0qh94wftsszrwdn2bnw8cy` service tier `on_demand` on tokens per minute (TPM): Limit 8"}
+{"ts": "2026-10-27T16:57:16.457", "event": "llm_call", "provider": "gemini", "model": "gemini-2.5-flash", "ok": false, "latency_ms": 2874, "prompt_tokens": null, "completion_tokens": null, "error": "RateLimitError: Error code: 429 - [{'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/g"}
+{"ts": "2026-10-27T16:57:21.085", "event": "llm_call", "provider": "openrouter", "model": "openai/gpt-oss-120b", "ok": true, "latency_ms": 4627, "prompt_tokens": 5502, "completion_tokens": 45, "error": ""}
+{"ts": "2026-10-27T16:57:21.088", "event": "agent_tool", "tool": "read_file", "result": "incidentzero/agent/policies.py (lines 1-78 of 78)"}
+{"ts": "2026-10-27T16:57:39.132", "event": "llm_call", "provider": "openrouter", "model": "openai/gpt-oss-120b", "ok": true, "latency_ms": 18042, "prompt_tokens": 6616, "completion_tokens": 405, "error": ""}
+{"ts": "2026-10-27T16:57:39.134", "event": "agent_tool", "tool": "edit_tests", "result": "REJECTED: `old` must occur exactly once in the test file (found 0 times). Copy it exactly from the file, or use write_tests."}
+{"ts": "2026-10-27T16:57:44.302", "event": "llm_call", "provider": "openrouter", "model": "openai/gpt-oss-120b", "ok": true, "latency_ms": 5165, "prompt_tokens": 6863, "completion_tokens": 1217, "error": ""}
+{"ts": "2026-10-27T16:57:44.305", "event": "investigated", "steps": 4, "repairs": 0, "error": ""}
+{"ts": "2026-10-27T16:57:44.334", "event": "memory_write", "table": "test_runs", "detail": "run c5a641af: 20/23 passed"}
+{"ts": "2026-10-27T16:57:44.337", "event": "memory_read", "table": "test_runs", "detail": "report already delivered for nogit-639abb: False"}
+{"ts": "2026-10-27T16:57:44.350", "event": "memory_write", "table": "notifications", "detail": "saved_to_outbox -> (outbox)"}
+{"ts": "2026-10-27T16:57:44.356", "event": "memory_write", "table": "test_runs", "detail": "run c5a641af report delivered"}
+{"ts": "2026-10-27T16:57:44.357", "event": "email_sent", "channel": "outbox", "to": ""}
+{"ts": "2026-10-27T16:57:44.359", "event": "run_finished", "seconds": 36.7, "action": "rerun", "passed": 20, "total": 23, "memory": "on"}
+{"ts": "2026-10-27T16:57:49.498", "event": "memory_read", "table": "spec_baselines", "detail": "latest version: 1"}
+{"ts": "2026-10-27T16:57:49.500", "event": "memory_read", "table": "generated_test_suites", "detail": "current: 21a00ca9"}
+{"ts": "2026-10-27T16:57:49.501", "event": "memory_read", "table": "test_runs", "detail": "last run: nogit-639abb895c"}
+{"ts": "2026-10-27T16:57:49.503", "event": "memory_read", "table": "approvals", "detail": "1 pending"}
+{"ts": "2026-10-27T16:57:55.970", "event": "memory_read", "table": "spec_baselines", "detail": "latest version: 1"}
+{"ts": "2026-10-27T16:57:55.971", "event": "memory_read", "table": "generated_test_suites", "detail": "current: 21a00ca9"}
+{"ts": "2026-10-27T16:57:55.973", "event": "memory_read", "table": "test_runs", "detail": "last run: nogit-639abb895c"}
+{"ts": "2026-10-27T16:57:55.975", "event": "onboard", "action": "noop", "commit_sha": "nogit-639abb895ce8", "spec_version": 1}
+{"ts": "2026-10-27T16:57:55.979", "event": "run_finished", "seconds": 0.1, "action": "noop", "passed": null, "total": null, "memory": "on"}
+{"ts": "2026-10-27T16:58:04.945", "event": "memory_read", "table": "spec_baselines", "detail": "latest version: 1"}
+{"ts": "2026-10-27T16:58:04.952", "event": "memory_write", "table": "spec_baselines", "detail": "v2 (66b875afe0e9)"}
+{"ts": "2026-10-27T16:58:04.953", "event": "spec_baseline_created", "version": 2, "spec_hash": "66b875afe0e9"}
+{"ts": "2026-10-27T16:58:04.954", "event": "memory_read", "table": "generated_test_suites", "detail": "current: 21a00ca9"}
+{"ts": "2026-10-27T16:58:04.955", "event": "memory_read", "table": "test_runs", "detail": "last run: nogit-639abb895c"}
+{"ts": "2026-10-27T16:58:04.956", "event": "onboard", "action": "generate", "commit_sha": "nogit-c3f0122d7612", "spec_version": 2}
+{"ts": "2026-10-27T16:58:04.991", "event": "memory_read", "table": "generated_test_suites", "detail": "current: 21a00ca9"}
+{"ts": "2026-10-27T16:58:04.992", "event": "memory_read", "table": "lessons", "detail": "0 approved lessons"}
+{"ts": "2026-10-27T16:58:14.057", "event": "llm_call", "provider": "groq", "model": "openai/gpt-oss-120b", "ok": true, "latency_ms": 9064, "prompt_tokens": 6354, "completion_tokens": 3072, "error": ""}
+{"ts": "2026-10-27T16:58:22.423", "event": "llm_call", "provider": "gemini", "model": "gemini-2.5-flash", "ok": false, "latency_ms": 8362, "prompt_tokens": null, "completion_tokens": null, "error": "RateLimitError: Error code: 429 - [{'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/g"}
+{"ts": "2026-10-27T17:00:45.922", "event": "llm_call", "provider": "openrouter", "model": "openai/gpt-oss-120b", "ok": true, "latency_ms": 143497, "prompt_tokens": 6354, "completion_tokens": 3775, "error": ""}
+{"ts": "2026-10-27T17:00:45.933", "event": "tests_generated", "attempt": 1, "provider": "openrouter", "valid": true, "problem": "", "used_previous_suite": true, "lessons": 0}
+{"ts": "2026-10-27T17:00:45.944", "event": "memory_write", "table": "generated_test_suites", "detail": "new CURRENT 43c258d3; previous SUPERSEDED"}
+{"ts": "2026-10-27T17:00:45.946", "event": "memory_read", "table": "generated_test_suites", "detail": "current: 43c258d3"}
+{"ts": "2026-10-27T17:00:47.454", "event": "tests_executed", "exit_code": 0, "total": 26, "passed": 26, "failed": 0}
+{"ts": "2026-10-27T17:00:47.462", "event": "memory_write", "table": "test_runs", "detail": "run 1ffe1d67: 26/26 passed"}
+{"ts": "2026-10-27T17:00:47.464", "event": "memory_read", "table": "test_runs", "detail": "report already delivered for nogit-c3f012: False"}
+{"ts": "2026-10-27T17:00:47.473", "event": "memory_write", "table": "notifications", "detail": "saved_to_outbox -> (outbox)"}
+{"ts": "2026-10-27T17:00:47.479", "event": "memory_write", "table": "test_runs", "detail": "run 1ffe1d67 report delivered"}
+{"ts": "2026-10-27T17:00:47.480", "event": "email_sent", "channel": "outbox", "to": ""}
+{"ts": "2026-10-27T17:00:47.482", "event": "run_finished", "seconds": 162.6, "action": "generate", "passed": 26, "total": 26, "memory": "on"}
+{"ts": "2026-10-27T17:00:51.967", "event": "memory_read", "table": "spec_baselines", "detail": "latest version: 2"}
+{"ts": "2026-10-27T17:00:51.969", "event": "memory_read", "table": "generated_test_suites", "detail": "current: 43c258d3"}
+{"ts": "2026-10-27T17:00:51.970", "event": "memory_read", "table": "test_runs", "detail": "last run: nogit-c3f0122d76"}
+{"ts": "2026-10-27T17:00:51.971", "event": "onboard", "action": "rerun", "commit_sha": "nogit-e602b42caffb", "spec_version": 2}
+{"ts": "2026-10-27T17:00:51.973", "event": "memory_read", "table": "generated_test_suites", "detail": "current: 43c258d3"}
+{"ts": "2026-10-27T17:00:53.544", "event": "tests_executed", "exit_code": 1, "total": 26, "passed": 25, "failed": 1}
+{"ts": "2026-10-27T17:00:53.546", "event": "memory_read", "table": "generated_test_suites", "detail": "current: 43c258d3"}
+{"ts": "2026-10-27T17:00:53.549", "event": "memory_read", "table": "test_runs", "detail": "3 recent runs"}
+{"ts": "2026-10-27T17:00:53.551", "event": "memory_read", "table": "lessons", "detail": "0 approved lessons"}
+{"ts": "2026-10-27T17:00:54.677", "event": "llm_call", "provider": "groq", "model": "openai/gpt-oss-120b", "ok": false, "latency_ms": 1118, "prompt_tokens": null, "completion_tokens": null, "error": "APIStatusError: Error code: 413 - {'error': {'message': 'Request too large for model `openai/gpt-oss-120b` in organization `org_01jz0qh94wftsszrwdn2bnw8cy` service tier `on_demand` on tokens per minute (TPM): Limit 8"}
+{"ts": "2026-10-27T17:00:56.909", "event": "llm_call", "provider": "gemini", "model": "gemini-2.5-flash", "ok": false, "latency_ms": 2231, "prompt_tokens": null, "completion_tokens": null, "error": "RateLimitError: Error code: 429 - [{'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/g"}
+{"ts": "2026-10-27T17:00:59.394", "event": "llm_call", "provider": "openrouter", "model": "openai/gpt-oss-120b", "ok": true, "latency_ms": 2484, "prompt_tokens": 5284, "completion_tokens": 58, "error": ""}
+{"ts": "2026-10-27T17:00:59.396", "event": "agent_tool", "tool": "search", "result": "ERROR: KeyError: 'pattern'"}
+{"ts": "2026-10-27T17:01:02.401", "event": "llm_call", "provider": "openrouter", "model": "openai/gpt-oss-120b", "ok": true, "latency_ms": 3004, "prompt_tokens": 5334, "completion_tokens": 44, "error": ""}
+{"ts": "2026-10-27T17:01:02.404", "event": "agent_tool", "tool": "search", "result": "ERROR: KeyError: 'pattern'"}
+{"ts": "2026-10-27T17:01:05.708", "event": "llm_call", "provider": "openrouter", "model": "openai/gpt-oss-120b", "ok": true, "latency_ms": 3301, "prompt_tokens": 5383, "completion_tokens": 37, "error": ""}
+{"ts": "2026-10-27T17:01:05.738", "event": "agent_tool", "tool": "list_files", "result": ".gitignore"}
+{"ts": "2026-10-27T17:01:08.644", "event": "llm_call", "provider": "openrouter", "model": "openai/gpt-oss-120b", "ok": true, "latency_ms": 2904, "prompt_tokens": 5672, "completion_tokens": 50, "error": ""}
+{"ts": "2026-10-27T17:01:14.303", "event": "llm_call", "provider": "openrouter", "model": "openai/gpt-oss-120b", "ok": true, "latency_ms": 5656, "prompt_tokens": 5701, "completion_tokens": 65, "error": ""}
+{"ts": "2026-10-27T17:01:14.306", "event": "agent_tool", "tool": "read_file", "result": "incidentzero/telemetry/budget.py (lines 1-35 of 35)"}
+{"ts": "2026-10-27T17:01:30.222", "event": "llm_call", "provider": "openrouter", "model": "openai/gpt-oss-120b", "ok": true, "latency_ms": 15914, "prompt_tokens": 6148, "completion_tokens": 439, "error": ""}
+{"ts": "2026-10-27T17:01:30.226", "event": "investigated", "steps": 6, "repairs": 0, "error": ""}
+{"ts": "2026-10-27T17:01:30.254", "event": "memory_write", "table": "test_runs", "detail": "run 668b35f7: 25/26 passed"}
+{"ts": "2026-10-27T17:01:30.256", "event": "memory_read", "table": "test_runs", "detail": "report already delivered for nogit-e602b4: False"}
+{"ts": "2026-10-27T17:01:30.264", "event": "memory_write", "table": "notifications", "detail": "saved_to_outbox -> (outbox)"}
+{"ts": "2026-10-27T17:01:30.271", "event": "memory_write", "table": "test_runs", "detail": "run 668b35f7 report delivered"}
+{"ts": "2026-10-27T17:01:30.272", "event": "email_sent", "channel": "outbox", "to": ""}
+{"ts": "2026-10-27T17:01:30.274", "event": "run_finished", "seconds": 38.4, "action": "rerun", "passed": 25, "total": 26, "memory": "on"}
+{"ts": "2026-10-27T17:01:35.196", "event": "memory_read", "table": "spec_baselines", "detail": "latest version: 2"}
+{"ts": "2026-10-27T17:01:35.197", "event": "memory_read", "table": "generated_test_suites", "detail": "current: 43c258d3"}
+{"ts": "2026-10-27T17:01:35.199", "event": "memory_read", "table": "test_runs", "detail": "last run: nogit-e602b42caf"}
+{"ts": "2026-10-27T17:01:35.199", "event": "onboard", "action": "rerun", "commit_sha": "nogit-60dbdc158c13", "spec_version": 2}
+{"ts": "2026-10-27T17:01:35.202", "event": "memory_read", "table": "generated_test_suites", "detail": "current: 43c258d3"}
+{"ts": "2026-10-27T17:01:36.914", "event": "tests_executed", "exit_code": 1, "total": 27, "passed": 26, "failed": 1}
+{"ts": "2026-10-27T17:01:36.917", "event": "memory_read", "table": "generated_test_suites", "detail": "current: 43c258d3"}
+{"ts": "2026-10-27T17:01:36.922", "event": "memory_read", "table": "test_runs", "detail": "3 recent runs"}
+{"ts": "2026-10-27T17:01:36.923", "event": "memory_read", "table": "lessons", "detail": "0 approved lessons"}
+{"ts": "2026-10-27T17:01:38.170", "event": "llm_call", "provider": "groq", "model": "openai/gpt-oss-120b", "ok": false, "latency_ms": 1231, "prompt_tokens": null, "completion_tokens": null, "error": "APIStatusError: Error code: 413 - {'error': {'message': 'Request too large for model `openai/gpt-oss-120b` in organization `org_01jz0qh94wftsszrwdn2bnw8cy` service tier `on_demand` on tokens per minute (TPM): Limit 8"}
+{"ts": "2026-10-27T17:01:40.544", "event": "llm_call", "provider": "gemini", "model": "gemini-2.5-flash", "ok": false, "latency_ms": 2373, "prompt_tokens": null, "completion_tokens": null, "error": "RateLimitError: Error code: 429 - [{'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/g"}
+{"ts": "2026-10-27T17:01:49.842", "event": "llm_call", "provider": "openrouter", "model": "openai/gpt-oss-120b", "ok": true, "latency_ms": 9296, "prompt_tokens": 5477, "completion_tokens": 260, "error": ""}
+{"ts": "2026-10-27T17:01:49.846", "event": "agent_tool", "tool": "read_file", "result": "spectest_tests/test_incidentzero_spec.py (lines 340-367 of 367)"}
+{"ts": "2026-10-27T17:02:08.372", "event": "llm_call", "provider": "openrouter", "model": "openai/gpt-oss-120b", "ok": true, "latency_ms": 18524, "prompt_tokens": 5919, "completion_tokens": 508, "error": ""}
+{"ts": "2026-10-27T17:02:08.436", "event": "agent_tool", "tool": "edit_tests", "result": "ACCEPTED: test file updated. Call run_tests to verify."}
+{"ts": "2026-10-27T17:02:15.388", "event": "llm_call", "provider": "openrouter", "model": "openai/gpt-oss-120b", "ok": true, "latency_ms": 6950, "prompt_tokens": 6103, "completion_tokens": 119, "error": ""}
+{"ts": "2026-10-27T17:02:16.822", "event": "agent_tool", "tool": "run_tests", "result": "27/27 passed; failing: none"}
+{"ts": "2026-10-27T17:02:25.252", "event": "llm_call", "provider": "openrouter", "model": "openai/gpt-oss-120b", "ok": true, "latency_ms": 8428, "prompt_tokens": 6162, "completion_tokens": 181, "error": ""}
+{"ts": "2026-10-27T17:02:25.254", "event": "investigated", "steps": 4, "repairs": 1, "error": ""}
+{"ts": "2026-10-27T17:02:25.265", "event": "memory_write", "table": "generated_test_suites", "detail": "new CURRENT b22e6a32; previous SUPERSEDED"}
+{"ts": "2026-10-27T17:02:25.272", "event": "memory_write", "table": "approvals", "detail": "test_repair 90428432 PENDING"}
+{"ts": "2026-10-27T17:02:25.279", "event": "memory_write", "table": "lessons", "detail": "test_retry_backoff_starts_at_two_seconds (PENDING)"}
+{"ts": "2026-10-27T17:02:25.280", "event": "approval_requested", "approval_id": "90428432", "kind": "test_repair", "tests": "test_retry_backoff_starts_at_two_seconds"}
+{"ts": "2026-10-27T17:02:25.282", "event": "memory_read", "table": "generated_test_suites", "detail": "current: b22e6a32"}
+{"ts": "2026-10-27T17:02:26.746", "event": "tests_executed", "exit_code": 0, "total": 27, "passed": 27, "failed": 0}
+{"ts": "2026-10-27T17:02:26.754", "event": "memory_write", "table": "test_runs", "detail": "run f41894e6: 27/27 passed"}
+{"ts": "2026-10-27T17:02:26.762", "event": "memory_read", "table": "test_runs", "detail": "report already delivered for nogit-60dbdc: False"}
+{"ts": "2026-10-27T17:02:26.770", "event": "memory_write", "table": "notifications", "detail": "saved_to_outbox -> (outbox)"}
+{"ts": "2026-10-27T17:02:26.776", "event": "memory_write", "table": "test_runs", "detail": "run f41894e6 report delivered"}
+{"ts": "2026-10-27T17:02:26.777", "event": "email_sent", "channel": "outbox", "to": ""}
+{"ts": "2026-10-27T17:02:26.779", "event": "run_finished", "seconds": 51.7, "action": "rerun", "passed": 27, "total": 27, "memory": "on"}
+{"ts": "2026-10-27T17:02:31.202", "event": "memory_read", "table": "spec_baselines", "detail": "latest version: 2"}
+{"ts": "2026-10-27T17:02:31.203", "event": "memory_read", "table": "generated_test_suites", "detail": "current: b22e6a32"}
+{"ts": "2026-10-27T17:02:31.204", "event": "memory_read", "table": "test_runs", "detail": "last run: nogit-60dbdc158c"}
+{"ts": "2026-10-27T17:02:31.206", "event": "memory_read", "table": "approvals", "detail": "2 pending"}
+{"ts": "2026-10-27T17:02:35.747", "event": "memory_read", "table": "approvals", "detail": "2 pending"}
+{"ts": "2026-10-27T17:02:35.748", "event": "memory_read", "table": "generated_test_suites", "detail": "current: b22e6a32"}
+{"ts": "2026-10-27T17:02:35.754", "event": "memory_write", "table": "approvals", "detail": "c9d2ef36 APPROVED"}
+{"ts": "2026-10-27T17:02:35.755", "event": "approval_decided", "approval_id": "c9d2ef36", "decision": "approved"}
+{"ts": "2026-10-27T17:02:35.760", "event": "memory_write", "table": "approvals", "detail": "90428432 APPROVED"}
+{"ts": "2026-10-27T17:02:35.761", "event": "approval_decided", "approval_id": "90428432", "decision": "approved"}
+{"ts": "2026-10-27T17:02:43.652", "event": "memory_read", "table": "spec_baselines", "detail": "latest version: 2"}
+{"ts": "2026-10-27T17:02:43.654", "event": "memory_read", "table": "generated_test_suites", "detail": "current: b22e6a32"}
+{"ts": "2026-10-27T17:02:43.655", "event": "memory_read", "table": "test_runs", "detail": "last run: nogit-60dbdc158c"}
+{"ts": "2026-10-27T17:02:43.656", "event": "onboard", "action": "rerun", "commit_sha": "nogit-bfe636609162", "spec_version": 2}
+{"ts": "2026-10-27T17:02:43.659", "event": "memory_read", "table": "generated_test_suites", "detail": "current: b22e6a32"}
+{"ts": "2026-10-27T17:02:46.280", "event": "tests_executed", "exit_code": 0, "total": 27, "passed": 27, "failed": 0}
+{"ts": "2026-10-27T17:02:46.289", "event": "memory_write", "table": "test_runs", "detail": "run 6a89a149: 27/27 passed"}
+{"ts": "2026-10-27T17:02:46.291", "event": "memory_read", "table": "test_runs", "detail": "report already delivered for nogit-bfe636: False"}
+{"ts": "2026-10-27T17:02:52.213", "event": "memory_write", "table": "notifications", "detail": "failed -> owner@[redacted]"}
+{"ts": "2026-10-27T17:02:52.214", "event": "email_failed", "detail": "login rejected for owner@[redacted] (server closed the connection during login). Gmail needs an App Password, not your normal password: turn on 2-Step Verification, then create one at https://myaccount.google.com/apppasswords (16 letters). School/work accounts: your admin may have disabled App Passwords; use a personal Gmail as SMTP_USER instead."}
+{"ts": "2026-10-27T17:02:52.215", "event": "run_finished", "seconds": 8.7, "action": "rerun", "passed": 27, "total": 27, "memory": "on"}
+{"ts": "2026-10-27T17:02:57.168", "event": "memory_read", "table": "spec_baselines", "detail": "latest version: 2"}
+{"ts": "2026-10-27T17:02:57.170", "event": "memory_read", "table": "generated_test_suites", "detail": "current: b22e6a32"}
+{"ts": "2026-10-27T17:02:57.171", "event": "memory_read", "table": "test_runs", "detail": "last run: nogit-bfe6366091"}
+{"ts": "2026-10-27T17:02:57.172", "event": "onboard", "action": "report_only", "commit_sha": "nogit-bfe636609162", "spec_version": 2}
+{"ts": "2026-10-27T17:02:57.178", "event": "memory_read", "table": "test_runs", "detail": "report already delivered for nogit-bfe636: False"}
+{"ts": "2026-10-27T17:03:02.857", "event": "memory_write", "table": "notifications", "detail": "sent -> owner@[redacted]"}
+{"ts": "2026-10-27T17:03:02.863", "event": "memory_write", "table": "test_runs", "detail": "run 6a89a149 report delivered"}
+{"ts": "2026-10-27T17:03:02.864", "event": "email_sent", "channel": "smtp", "to": "owner@[redacted]"}
+{"ts": "2026-10-27T17:03:02.867", "event": "run_finished", "seconds": 5.9, "action": "report_only", "passed": 27, "total": 27, "memory": "on"}
+{"ts": "2026-10-27T17:03:07.856", "event": "memory_read", "table": "spec_baselines", "detail": "latest version: 2"}
+{"ts": "2026-10-27T17:03:07.857", "event": "memory_read", "table": "generated_test_suites", "detail": "current: b22e6a32"}
+{"ts": "2026-10-27T17:03:07.858", "event": "memory_read", "table": "test_runs", "detail": "last run: nogit-bfe6366091"}
+{"ts": "2026-10-27T17:03:07.859", "event": "onboard", "action": "noop", "commit_sha": "nogit-bfe636609162", "spec_version": 2}
+{"ts": "2026-10-27T17:03:07.861", "event": "run_finished", "seconds": 0.1, "action": "noop", "passed": null, "total": null, "memory": "on"}

@@ -55,6 +55,20 @@ MAX_DOCSTRING_LINES = 12
 PUBLIC_DUNDERS = {"__init__", "__call__"}  # constructor/call signatures matter for tests
 
 
+MAX_FIELD_CHARS = 120
+
+
+def _public_field(node: ast.AST) -> bool:
+    """A class-level `name: type [= default]` or `NAME = value` whose name is public."""
+    if isinstance(node, ast.AnnAssign):
+        target = node.target
+    elif isinstance(node, ast.Assign) and len(node.targets) == 1:
+        target = node.targets[0]
+    else:
+        return False
+    return isinstance(target, ast.Name) and not target.id.startswith("_")
+
+
 def _header(node: ast.AST) -> str:
     """`def name(args) -> ret:` / `class Name(Base):` on one line, without decorators or body."""
     stub = copy.copy(node)
@@ -76,6 +90,11 @@ def _describe(node: ast.AST, indent: str, docstrings: bool) -> list[str]:
             if isinstance(child, (ast.FunctionDef, ast.AsyncFunctionDef)) and (
                     not child.name.startswith("_") or child.name in PUBLIC_DUNDERS):
                 lines += _describe(child, indent + "    ", docstrings)
+            elif _public_field(child):
+                # dataclass fields and enum/constant values are part of the interface (e.g. `hypothesis: str`,
+                # `LOW = "low"`): tests need them to construct objects and compare values
+                text = ast.unparse(child)
+                lines.append(indent + "    " + (text if len(text) <= MAX_FIELD_CHARS else text[:MAX_FIELD_CHARS] + " ..."))
     return lines
 
 

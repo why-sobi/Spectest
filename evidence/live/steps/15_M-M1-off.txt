@@ -1,0 +1,8 @@
+$ spectest run --no-memory
+# expected: regenerates the suite and sends the same report again
+
+[spectest] onboard: action=generate, commit_sha=nogit-184514945f52, spec_version=2, memory=off
+[spectest] tests_generated: attempt=1, provider=groq, valid=True, problem=, used_previous_suite=False, lessons=0
+[spectest] tests_executed: exit_code=0, total=20, passed=20, failed=0
+[spectest] email_sent: channel=outbox, to=
+[SpecTest] incidentzero @ nogit-184514: PASS (20/20 passed)

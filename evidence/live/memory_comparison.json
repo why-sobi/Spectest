@@ -1,0 +1,155 @@
+[
+  {
+    "case": "M1 unchanged project, later run",
+    "expected_with_memory": "nothing to do: 0 LLM calls, no new report (already reported)",
+    "expected_without_memory": "regenerates the suite and sends the same report again",
+    "memory_on": {
+      "success": true,
+      "observed": "action=noop, LLM calls=0, new reports=0",
+      "action": "noop",
+      "llm_calls": 0,
+      "llm_calls_failed": 0,
+      "providers": [],
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "llm_latency_s": 0.0,
+      "agent_tool_calls": 0,
+      "memory_reads": 3,
+      "memory_writes": 0,
+      "tests": null,
+      "passed": null,
+      "run_seconds": 0.1,
+      "reports": [],
+      "report_failures": 0
+    },
+    "memory_off": {
+      "success": false,
+      "observed": "action=generate, LLM calls=1, new reports=1",
+      "action": "generate",
+      "llm_calls": 1,
+      "llm_calls_failed": 0,
+      "providers": [
+        "groq"
+      ],
+      "prompt_tokens": 3944,
+      "completion_tokens": 2929,
+      "llm_latency_s": 8.2,
+      "agent_tool_calls": 0,
+      "memory_reads": 1,
+      "memory_writes": 5,
+      "tests": 20,
+      "passed": 20,
+      "run_seconds": 11.8,
+      "reports": [
+        "outbox"
+      ],
+      "report_failures": 0
+    }
+  },
+  {
+    "case": "M2 regression after earlier reviews",
+    "expected_with_memory": "re-runs the same approved suite (no regeneration) and reports a CODE BUG in agent/policies.py",
+    "expected_without_memory": "regenerates a new suite first, so the regression is judged against unreviewed tests",
+    "memory_on": {
+      "success": true,
+      "observed": "regenerated suite=False; CODE BUG in policies.py reported=True; LLM calls=6",
+      "action": "rerun",
+      "llm_calls": 6,
+      "llm_calls_failed": 2,
+      "providers": [
+        "groq",
+        "openrouter"
+      ],
+      "prompt_tokens": 24113,
+      "completion_tokens": 1819,
+      "llm_latency_s": 200.3,
+      "agent_tool_calls": 4,
+      "memory_reads": 8,
+      "memory_writes": 3,
+      "tests": 23,
+      "passed": 20,
+      "run_seconds": 204.0,
+      "reports": [
+        "outbox"
+      ],
+      "report_failures": 0
+    },
+    "memory_off": {
+      "success": false,
+      "observed": "regenerated suite=True; CODE BUG in policies.py reported=True; LLM calls=13",
+      "action": "generate",
+      "llm_calls": 13,
+      "llm_calls_failed": 2,
+      "providers": [
+        "groq",
+        "openrouter"
+      ],
+      "prompt_tokens": 80008,
+      "completion_tokens": 17416,
+      "llm_latency_s": 293.3,
+      "agent_tool_calls": 8,
+      "memory_reads": 2,
+      "memory_writes": 5,
+      "tests": 22,
+      "passed": 19,
+      "run_seconds": 297.3,
+      "reports": [
+        "outbox"
+      ],
+      "report_failures": 0
+    }
+  },
+  {
+    "case": "M3 spec change after an approved repair",
+    "expected_with_memory": "updates the previous suite: >=80% of existing tests kept, including the approved repaired test",
+    "expected_without_memory": "writes a fresh suite: approved repair and most existing tests are lost",
+    "memory_on": {
+      "success": false,
+      "observed": "previous tests kept=95%; approved repaired test kept and still correct=False",
+      "action": "generate",
+      "llm_calls": 3,
+      "llm_calls_failed": 1,
+      "providers": [
+        "groq",
+        "openrouter"
+      ],
+      "prompt_tokens": 14014,
+      "completion_tokens": 7122,
+      "llm_latency_s": 83.6,
+      "agent_tool_calls": 0,
+      "memory_reads": 7,
+      "memory_writes": 5,
+      "tests": 28,
+      "passed": 28,
+      "run_seconds": 86.7,
+      "reports": [
+        "outbox"
+      ],
+      "report_failures": 0
+    },
+    "memory_off": {
+      "success": false,
+      "observed": "previous tests kept=26%; approved repaired test kept and still correct=False",
+      "action": "generate",
+      "llm_calls": 7,
+      "llm_calls_failed": 2,
+      "providers": [
+        "groq",
+        "openrouter"
+      ],
+      "prompt_tokens": 26415,
+      "completion_tokens": 5057,
+      "llm_latency_s": 89.5,
+      "agent_tool_calls": 3,
+      "memory_reads": 2,
+      "memory_writes": 5,
+      "tests": 20,
+      "passed": 19,
+      "run_seconds": 92.6,
+      "reports": [
+        "outbox"
+      ],
+      "report_failures": 0
+    }
+  }
+]

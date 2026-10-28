@@ -1,0 +1,8 @@
+$ spectest init incidentzero
+# expected: init binds memory to project 'incidentzero'
+
+  created C:\Users\Sobi\AppData\Local\Temp\spectest_live_ry77rhhs\IncidentZero\SPECTEST.md
+  created C:\Users\Sobi\AppData\Local\Temp\spectest_live_ry77rhhs\IncidentZero\.spectest\spectest.db
+  created C:\Users\Sobi\AppData\Local\Temp\spectest_live_ry77rhhs\IncidentZero\.gitignore (+ /.spectest/, /spectest_tests/, /SPECTEST.md, .env)
+  testing code in: incidentzero (change with `source_dir:` in SPECTEST.md)
+Next: write docs/FEATURE_SPEC.md, review SPECTEST.md, add API keys with `spectest config`, then `spectest run`.

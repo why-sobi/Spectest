@@ -1,0 +1,6 @@
+$ spectest run
+# expected: only the delivery is retried; one real email sent
+
+[spectest] onboard: action=report_only, commit_sha=nogit-bfe636609162, spec_version=2
+[spectest] email_sent: channel=smtp, to=owner@[redacted]
+[SpecTest] incidentzero @ nogit-bfe636: PASS (27/27 passed)

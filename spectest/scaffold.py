@@ -193,7 +193,7 @@ def init_project(root: Path | str = ".", force: bool = False,
     cfg = load_config(root)  # honors any custom paths in an existing SPECTEST.md
     cfg.tests_dir.mkdir(parents=True, exist_ok=True)
     if not cfg.db_path.exists():
-        Memory(cfg.db_path).close()  # creates the schema
+        Memory(cfg.db_path, cfg.project_id).close()  # creates the schema, bound to this project
         created.append(str(cfg.db_path))
 
     added = ensure_gitignore(root, cfg.gitignore_entries)

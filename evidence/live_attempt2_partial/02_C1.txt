@@ -1,0 +1,27 @@
+$ spectest run
+# expected: spec v1 stored; tests generated from the spec and run; report saved
+
+[spectest] spec_baseline_created: version=1, spec_hash=e1f98edb708c
+[spectest] onboard: action=generate, commit_sha=nogit-184514945f52, spec_version=1
+[spectest] tests_generated: attempt=1, provider=gemini, valid=True, problem=, used_previous_suite=False, lessons=0
+[spectest] tests_executed: exit_code=1, total=70, passed=50, failed=20
+[spectest] agent_tool: tool=list_files, result=incidentzero/__init__.py
+[spectest] agent_tool: tool=read_file, result=incidentzero/agent/policies.py (lines 15-22 of 78)
+[spectest] agent_tool: tool=read_file, result=incidentzero/domain/models.py (lines 1-20 of 54)
+[spectest] agent_tool: tool=edit_tests, result=REJECTED: No existing test was changed
+[spectest] agent_tool: tool=edit_tests, result=REJECTED: No existing test was changed
+[spectest] agent_tool: tool=edit_tests, result=REJECTED: No existing test was changed
+[spectest] agent_tool: tool=read_file, result=spectest_tests/test_incidentzero_spec.py (lines 298-305 of 621)
+[spectest] agent_tool: tool=edit_tests, result=REJECTED: No existing test was changed
+[spectest] agent_tool: tool=edit_tests, result=REJECTED: No existing test was changed
+[spectest] agent_tool: tool=read_file, result=spectest_tests/test_incidentzero_spec.py (lines 291-297 of 621)
+[spectest] agent_tool: tool=edit_tests, result=REJECTED: No existing test was changed
+[spectest] agent_tool: tool=read_file, result=spectest_tests/test_incidentzero_spec.py (lines 290-297 of 621)
+[spectest] agent_tool: tool=finish, result=Recorded.
+[spectest] investigated: steps=12, repairs=0, error=
+[spectest] email_sent: channel=outbox, to=
+[SpecTest] incidentzero @ nogit-184514: FAIL (50/70 passed)
+[spectest] warning: groq: unusable reply -> fell back to gemini
+[spectest] groq unavailable (HTTP 413); skipping it for 600s
+[spectest] warning: groq: APIStatusError: Error code: 413 - {'error': {'message': 'Request too large for model `openai/gpt-oss-120b` in organization `org_01jz0qh94wftsszrwdn2bnw8cy` service tier `on_demand` on tokens per minute (TPM): Limit 8000, Requested 9903, please reduce your message size and try again. Need more  -> fell back to openrouter
+[spectest] warning: gemini: InternalServerError: Error code: 503 - [{'error': {'code': 503, 'message': 'This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.', 'status': 'UNAVAILABLE'}}] -> fell back to openrouter

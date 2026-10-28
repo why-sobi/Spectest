@@ -44,7 +44,8 @@ Rules:
 - Only the tools listed exist. You have at most {max_steps} steps. Read only what you need. End with finish."""
 
 REPAIR_RULE = ("Fix it with edit_tests (replace an exact snippet; best for small fixes) or write_tests (the full "
-               "file). List the tests you changed and quote the exact spec passage that shows the old test was wrong. "
+               "file). Fixtures and helpers may be fixed too. List the failing tests your fix repairs and quote the "
+               "exact spec passage that shows the old test was wrong. "
                "You have {left} repair(s) left. Then run_tests to verify.")
 NO_REPAIR_RULE = "Repairs are disabled for this project: describe the fix in finish instead."
 

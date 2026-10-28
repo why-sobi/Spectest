@@ -1,0 +1,22 @@
+$ spectest status
+# expected: status shows the pending repair and the recommended action
+
+Project       incidentzero   (C:\Users\Sobi\AppData\Local\Temp\spectest_live_17cd0o4e\IncidentZero)
+Spec          docs/FEATURE_SPEC.md v2
+Code          nogit-60dbdc158c13
+Tests         suite b22e6a32, 19 tests (CURRENT; 3 older versions kept)
+Last run      2026-10-27 12:02:26  27/27 passed
+Report        saved_to_outbox -> (outbox)  [automatic: no recipient configured, saved to outbox]
+Evidence      (agent diagnosis of the last run)
+              All tests now pass after fixing a test that incorrectly expected backoff intervals starting at 2 seconds.
+              
+              - test_retry_backoff_starts_at_two_seconds: TEST BUG
+                Why: The test expected backoff intervals of [2, 4] seconds, but the specification states the backoff starts at 1 second after the first failure (1, 2, 4, ...). The test was asserting an incorrect behavior.
+                Fix: Changed the assertion to expect [1, 2] seconds.
+Approval      c9d2ef36 PENDING: agent repaired tests (suite 21a00ca9)
+              - test_agent_state_observe_result_updates: The test incorrectly calculated which evidence_id should be the oldest in the truncated list of 8 results. With 12 results added, the 5th result (eid-12) should be the first of the 8 most recent.
+                spec: "the result is appended to `last_tool_results`, which keeps only the 8 most recent results."
+Approval      90428432 PENDING: agent repaired tests (suite b22e6a32)
+              - test_retry_backoff_starts_at_two_seconds: The test expected backoff intervals of [2, 4] seconds, but the specification defines exponential backoff starting at 1 second after the first failure (1, 2, 4, ...). Therefore the test was asserting an incorrect behavior.
+                spec: "Waits between attempts use exponential backoff: 1 second after the first failure, 2 seconds after the second, 4 after the third, and so on."
+Next action   Review the agent's test repairs below, then `spectest approve` or `spectest reject <id>`.

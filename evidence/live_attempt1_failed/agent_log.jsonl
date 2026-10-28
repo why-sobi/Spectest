@@ -1,0 +1,16 @@
+{"ts": "2026-10-27T16:43:48.374", "event": "memory_read", "table": "spec_baselines", "detail": "latest version: none"}
+{"ts": "2026-10-27T16:43:48.381", "event": "memory_write", "table": "spec_baselines", "detail": "v1 (e1f98edb708c)"}
+{"ts": "2026-10-27T16:43:48.382", "event": "spec_baseline_created", "version": 1, "spec_hash": "e1f98edb708c"}
+{"ts": "2026-10-27T16:43:48.384", "event": "memory_read", "table": "generated_test_suites", "detail": "current: none"}
+{"ts": "2026-10-27T16:43:48.385", "event": "memory_read", "table": "test_runs", "detail": "last run: none"}
+{"ts": "2026-10-27T16:43:48.385", "event": "onboard", "action": "generate", "commit_sha": "nogit-184514945f52", "spec_version": 1}
+{"ts": "2026-10-27T16:43:48.418", "event": "memory_read", "table": "generated_test_suites", "detail": "current: none"}
+{"ts": "2026-10-27T16:43:48.419", "event": "memory_read", "table": "lessons", "detail": "0 approved lessons"}
+{"ts": "2026-10-27T16:43:57.271", "event": "llm_call", "provider": "groq", "model": "openai/gpt-oss-120b", "ok": true, "latency_ms": 8850, "prompt_tokens": 3258, "completion_tokens": 3015, "error": ""}
+{"ts": "2026-10-27T16:43:57.277", "event": "tests_generated", "attempt": 1, "provider": "groq", "valid": false, "problem": "Disallowed import: time", "used_previous_suite": false, "lessons": 0}
+{"ts": "2026-10-27T16:44:13.869", "event": "llm_call", "provider": "groq", "model": "openai/gpt-oss-120b", "ok": true, "latency_ms": 16591, "prompt_tokens": 3279, "completion_tokens": 3045, "error": ""}
+{"ts": "2026-10-27T16:44:13.873", "event": "tests_generated", "attempt": 2, "provider": "groq", "valid": false, "problem": "Disallowed import: pathlib", "used_previous_suite": false, "lessons": 0}
+{"ts": "2026-10-27T16:44:42.490", "event": "llm_call", "provider": "groq", "model": "openai/gpt-oss-120b", "ok": false, "latency_ms": 28616, "prompt_tokens": null, "completion_tokens": null, "error": "RateLimitError: Error code: 429 - {'error': {'message': 'Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01jz0qh94wftsszrwdn2bnw8cy` service tier `on_demand` on tokens per minute (TPM): Limit "}
+{"ts": "2026-10-27T16:45:54.872", "event": "llm_call", "provider": "gemini", "model": "gemini-2.5-flash", "ok": true, "latency_ms": 72381, "prompt_tokens": 3655, "completion_tokens": 7558, "error": ""}
+{"ts": "2026-10-27T16:45:54.881", "event": "tests_generated", "attempt": 3, "provider": "gemini", "valid": false, "problem": "Disallowed import: time", "used_previous_suite": false, "lessons": 0}
+{"ts": "2026-10-27T16:45:54.883", "event": "run_finished", "seconds": 126.6, "action": "generate", "passed": null, "total": null, "memory": "on"}

@@ -2,7 +2,9 @@
 
     spectest init [folders]   set up SpecTest in the current folder (folders = code to test; default: auto-detect)
                               --git-hook: also test every commit automatically (no watcher needed)
-    spectest run       one check: (re)generate tests if needed, run, report
+    spectest run       one check: (re)generate tests if needed, run, report   (--no-memory: ignore stored memory)
+    spectest status    current state, recommended next action, evidence, pending approvals
+    spectest approve [ID|all] / spectest reject ID    decide on test repairs the agent made
     spectest watch     run on every spec/source change
     spectest history   past runs from this project's SQLite memory
     spectest config    open the shared settings file (API keys, email); --check, --test-email, --path
@@ -20,6 +22,7 @@ Graph:
 `investigate` is itself a LangGraph agent loop (see investigator.py).
 """
 import argparse
+import ast
 import hashlib
 import json
 import os
@@ -31,9 +34,9 @@ from typing import TypedDict
 
 from langgraph.graph import END, START, StateGraph
 
+from spectest import investigator
 from spectest.config import Config, load_config
 from spectest.memory import Memory
-from spectest import investigator
 from spectest.tools import llm_bridge, notifier, spec_reader, test_runner
 
 MAX_GENERATION_ATTEMPTS = 3
@@ -61,20 +64,30 @@ class AgentState(TypedDict, total=False):
     investigated: bool
     analysis: str
     repairs: list[dict]
+    approval_id: str
     agent_trace: list[str]
     message: str
     error: str
 
 
-def log(cfg: Config, event: str, **data):
+def log(cfg: Config, event: str, quiet: bool = False, **data):
+    """Append an event to .spectest/logs/agent.jsonl (and print it unless quiet)."""
     cfg.logs_dir.mkdir(parents=True, exist_ok=True)
-    entry = {"ts": datetime.now().isoformat(timespec="seconds"), "event": event, **data}
+    entry = {"ts": datetime.now().isoformat(timespec="milliseconds"), "event": event, **data}
     with open(cfg.logs_dir / "agent.jsonl", "a", encoding="utf-8") as f:
-        f.write(json.dumps(entry) + "\n")
-    print(f"[spectest] {event}: " + ", ".join(f"{k}={v}" for k, v in data.items() if k != "detail"))
+        f.write(json.dumps(entry, ensure_ascii=False) + "\n")
+    if not quiet:
+        print(f"[spectest] {event}: " + ", ".join(f"{k}={v}" for k, v in data.items() if k != "detail"))
 
 
-def build_graph(cfg: Config, mem: Memory):
+def open_memory(cfg: Config) -> Memory:
+    """The project's memory, with every read and write recorded in the agent log."""
+    return Memory(cfg.db_path, cfg.project_id,
+                  on_event=lambda kind, table, detail: log(cfg, kind, quiet=True, table=table, detail=detail))
+
+
+def build_graph(cfg: Config, mem: Memory, use_memory: bool = True):
+    """use_memory=False ignores everything stored (for the memory on/off comparison); records are still written."""
 
     def onboard(state: AgentState) -> AgentState:
         cfg.tests_dir.mkdir(parents=True, exist_ok=True)
@@ -88,6 +101,12 @@ def build_graph(cfg: Config, mem: Memory):
             spec_hash = spec_reader.sha256(spec + "\n<instructions>\n" + cfg.test_instructions)
         sha = spec_reader.commit_sha(cfg.root, cfg.source_dirs, cfg.exclude)
 
+        if not use_memory:  # nothing is looked up: every run starts from scratch
+            version = mem.add_baseline(cfg.project_id, spec_hash, spec)
+            log(cfg, "onboard", action="generate", commit_sha=sha, spec_version=version, memory="off")
+            return {"action": "generate", "spec": spec, "spec_hash": spec_hash, "spec_version": version,
+                    "commit_sha": sha}
+
         baseline = mem.latest_baseline()
         if baseline is None or baseline["spec_hash"] != spec_hash:
             version = mem.add_baseline(cfg.project_id, spec_hash, spec)
@@ -100,8 +119,8 @@ def build_graph(cfg: Config, mem: Memory):
             action = "generate"
         elif last is None or last["commit_sha"] != sha or last["suite_id"] != suite["suite_id"]:
             action = "rerun"
-        elif not last["email_sent"] and cfg.wants_email(last["failed_tests"]):
-            action = "report_only"
+        elif not last["email_sent"] and cfg.wants_email(last["failed_tests"] or bool(last["repairs"])):
+            action = "report_only"  # the last report failed to go out: retry delivery, nothing else
         else:
             action = "noop"
 
@@ -110,7 +129,8 @@ def build_graph(cfg: Config, mem: Memory):
             state["suite_id"] = suite["suite_id"]
         if action == "report_only":
             state.update(run_id=last["run_id"], total=last["total_tests"], passed=last["passed_tests"],
-                         failed=last["failed_tests"], analysis=last["failure_analysis"] or "")
+                         failed=last["failed_tests"], analysis=last["failure_analysis"] or "",
+                         repairs=json.loads(last["repairs"]) if last["repairs"] else [])
         if action == "noop":
             state["message"] = (f"No changes detected (spec v{version}, commit {sha[:12]}). "
                                 f"Last run: {last['passed_tests']}/{last['total_tests']} passed.")
@@ -120,9 +140,9 @@ def build_graph(cfg: Config, mem: Memory):
     def generate(state: AgentState) -> AgentState:
         signatures = spec_reader.extract_signatures(cfg.source_dirs, cfg.root, cfg.exclude)
         modules = spec_reader.project_modules(cfg.source_dirs, cfg.root, cfg.exclude) | cfg.allow_imports
-        previous = mem.current_suite()  # suite for the previous spec version, updated rather than rewritten
+        previous = mem.current_suite() if use_memory else None  # previous spec version's suite: update, not rewrite
         previous_code = previous["test_code"] if previous else ""
-        lessons = mem.recent_lessons()
+        lessons = mem.recent_lessons() if use_memory else []
         feedback = ""
         for attempt in range(1, MAX_GENERATION_ATTEMPTS + 1):
             try:
@@ -152,25 +172,31 @@ def build_graph(cfg: Config, mem: Memory):
 
     def investigate(state: AgentState) -> AgentState:
         suite = mem.current_suite()
-        ctx = investigator.Context(
-            cfg=cfg, spec=state["spec"], modules=spec_reader.project_modules(cfg.source_dirs, cfg.root, cfg.exclude) | cfg.allow_imports,
-            max_repairs=cfg.max_repairs, log=log,
-            sync=lambda code: sync_test_file(cfg, "candidate", code))
+        modules = spec_reader.project_modules(cfg.source_dirs, cfg.root, cfg.exclude) | cfg.allow_imports
+        ctx = investigator.Context(cfg=cfg, spec=state["spec"], modules=modules, max_repairs=cfg.max_repairs,
+                                   log=log, sync=lambda code: sync_test_file(cfg, "candidate", code))
         history = [f"{r['run_timestamp']}: {r['passed_tests']}/{r['total_tests']} passed"
                    + (f"; diagnosis: {(r['failure_analysis'] or '')[:300]}" if r["failed_tests"] else "")
-                   for r in mem.recent_runs(3)]
+                   for r in mem.recent_runs(3)] if use_memory else []
+        lessons = mem.recent_lessons() if use_memory else []
         result = investigator.investigate(ctx, suite["test_code"], state["output"], state.get("failing", []),
-                                          history, mem.recent_lessons())
+                                          history, lessons)
         repairs = result.get("repairs", [])
         log(cfg, "investigated", steps=result.get("steps", 0), repairs=len(repairs), error=result.get("error", ""))
         update: AgentState = {"investigated": True, "repairs": repairs, "agent_trace": result.get("trace", []),
                               "analysis": investigator.format_analysis(result, state["output"])}
-        if repairs:  # keep the repaired suite (same spec version) and remember what was wrong
+        if repairs:
+            # The repaired suite is used provisionally; it stays an agent suggestion until the developer approves.
+            # Its lessons only feed future test generation once approved.
             suite_id = mem.save_suite(state["commit_sha"], state["spec_hash"], result["suite_code"])
+            approval_id = mem.add_approval("test_repair", None, suite_id, suite["suite_id"], json.dumps(repairs))
             for r in repairs:
                 for test in r["tests"]:
-                    mem.add_lesson(state["spec_hash"], test, f"{r['reason']} (spec: \"{r['spec_quote']}\")")
-            update["suite_id"] = suite_id
+                    mem.add_lesson(state["spec_hash"], test, f"{r['reason']} (spec: \"{r['spec_quote']}\")",
+                                   approval_id)
+            log(cfg, "approval_requested", approval_id=approval_id[:8], kind="test_repair",
+                tests=",".join(t for r in repairs for t in r["tests"]))
+            update.update(suite_id=suite_id, approval_id=approval_id)
         else:
             sync_test_file(cfg, suite["suite_id"], suite["test_code"])  # undo any rejected candidate
         return update
@@ -179,6 +205,8 @@ def build_graph(cfg: Config, mem: Memory):
         run_id = mem.save_run(state["suite_id"], state["commit_sha"], state["total"], state["passed"],
                               state["failed"], state["output"], state.get("analysis", ""),
                               json.dumps(state.get("repairs", [])) if state.get("repairs") else "")
+        if state.get("approval_id"):
+            mem.attach_approval_run(state["approval_id"], run_id)
         return {"run_id": run_id}
 
     def report(state: AgentState) -> AgentState:
@@ -186,19 +214,25 @@ def build_graph(cfg: Config, mem: Memory):
         if not cfg.wants_email(state["failed"] or len(state.get("repairs", []))):
             log(cfg, "email_skipped", reason=f"email_on={cfg.email_on}")
             return {"message": f"{state['passed']}/{state['total']} passed (no email: email_on={cfg.email_on})"}
-        # Deterministic idempotency gate: one email per (commit, test suite).
-        if mem.email_already_sent(state["commit_sha"], state["suite_id"]):
+        # Deterministic idempotency gate: one report per (commit, test suite).
+        if use_memory and mem.email_already_sent(state["commit_sha"], state["suite_id"]):
             log(cfg, "email_skipped", reason="already_sent", commit_sha=state["commit_sha"])
             return {"message": "Report already sent for this commit."}
         subject, body = notifier.build_report(cfg.project_id, state["commit_sha"], state["spec_version"],
                                               state["total"], state["passed"], state["failed"],
                                               state.get("analysis", ""), state.get("repairs", []),
                                               cfg.test_file.relative_to(cfg.root).as_posix())
+        rule = (f"automatic: email_on={cfg.email_on}; recipient is the owner's configured address"
+                if cfg.report_email else "automatic: no recipient configured, saved to outbox")
         try:
             channel = notifier.send_report(cfg.report_email, subject, body, cfg.workspace / "outbox")
         except Exception as e:
+            mem.add_notification(state["run_id"], state["commit_sha"], state["suite_id"], cfg.report_email, rule,
+                                 "failed", f"{type(e).__name__}: {e}")
             log(cfg, "email_failed", detail=str(e))
-            return {"message": f"{subject} (email failed: {e}; will retry next run)"}
+            return {"message": f"{subject} (email failed: {e}; will retry on the next run)"}
+        outcome = "sent" if channel == "smtp" else "saved_to_outbox"
+        mem.add_notification(state["run_id"], state["commit_sha"], state["suite_id"], cfg.report_email, rule, outcome)
         mem.mark_email_sent(state["run_id"])
         log(cfg, "email_sent", channel=channel, to=cfg.report_email)
         return {"message": subject}
@@ -261,31 +295,147 @@ def acquire_lock(cfg: Config) -> Path | None:
     return None
 
 
-def run(root=".") -> AgentState:
+def run(root=".", use_memory: bool = True) -> AgentState:
     cfg = load_config(root)
     lock = acquire_lock(cfg)
     if lock is None:
         return {"action": "noop", "message": "Another SpecTest run is in progress for this project; skipped."}
-    mem = Memory(cfg.db_path)
+    mem = open_memory(cfg)
+    started = time.perf_counter()
+    llm_bridge.on_call = lambda **call: log(cfg, "llm_call", quiet=True, **call)
     try:
-        return build_graph(cfg, mem).invoke({})
+        final = build_graph(cfg, mem, use_memory).invoke({})
+        log(cfg, "run_finished", quiet=True, seconds=round(time.perf_counter() - started, 1),
+            action=final.get("action"), passed=final.get("passed"), total=final.get("total"),
+            memory="on" if use_memory else "off")
+        return final
     finally:
+        llm_bridge.on_call = None
         mem.close()
         lock.unlink(missing_ok=True)
 
 
+# --- status / approvals -------------------------------------------------------------------------------------------
+def _count_tests(code: str) -> int:
+    try:
+        return len(test_runner.test_functions(ast.parse(code)))
+    except SyntaxError:
+        return 0
+
+
+def status(root=".") -> dict:
+    """Current state, recommended next action, supporting evidence and pending approvals (read-only)."""
+    cfg = load_config(root)
+    mem = open_memory(cfg)
+    try:
+        spec_ok = cfg.spec_path.is_file()
+        spec, spec_hash = spec_reader.read_spec(cfg.spec_path) if spec_ok else ("", "")
+        if spec_ok and cfg.test_instructions:
+            spec_hash = spec_reader.sha256(spec + "\n<instructions>\n" + cfg.test_instructions)
+        sha = spec_reader.commit_sha(cfg.root, cfg.source_dirs, cfg.exclude)
+        baseline, suite, last = mem.latest_baseline(), mem.current_suite(), mem.last_run()
+        pending = mem.pending_approvals()
+        notes = [n for n in mem.notifications() if last and n["run_id"] == last["run_id"]]
+        superseded = mem.conn.execute(
+            "SELECT COUNT(*) FROM generated_test_suites WHERE status = 'SUPERSEDED'").fetchone()[0]
+
+        spec_changed = bool(spec_ok and (suite is None or suite["spec_hash"] != spec_hash))
+        code_changed = bool(last and last["commit_sha"] != sha)
+        delivery = notes[-1]["outcome"] if notes else ("not sent" if last else "-")
+        if not spec_ok or not spec.strip() or TEMPLATE_MARKER in spec:
+            action = f"Write the spec in {cfg.spec_path.relative_to(cfg.root).as_posix()}."
+        elif pending:
+            action = "Review the agent's test repairs below, then `spectest approve` or `spectest reject <id>`."
+        elif spec_changed:
+            action = "`spectest run`: the spec changed, so tests will be regenerated."
+        elif last is None or code_changed:
+            action = "`spectest run`: the code changed since the last run."
+        elif delivery == "failed":
+            action = "`spectest run` to retry delivering the last report."
+        elif last["failed_tests"]:
+            action = "Fix the CODE BUGs listed under evidence (or clarify the spec for SPEC AMBIGUITY), then run again."
+        else:
+            action = "Nothing to do: all tests pass for the current spec and code."
+        return {"cfg": cfg, "baseline": baseline, "suite": suite, "last": last, "pending": pending,
+                "notes": notes, "superseded": superseded, "spec_changed": spec_changed,
+                "code_changed": code_changed, "commit": sha, "delivery": delivery, "action": action}
+    finally:
+        mem.close()
+
+
+def print_status(root="."):
+    s = status(root)
+    cfg, suite, last = s["cfg"], s["suite"], s["last"]
+    print(f"Project       {cfg.project_id}   ({cfg.root})")
+    b = s["baseline"]
+    print(f"Spec          {cfg.spec_path.relative_to(cfg.root).as_posix()} "
+          f"v{b['version'] if b else '-'}{'  (CHANGED since last tests)' if s['spec_changed'] else ''}")
+    print(f"Code          {s['commit'][:20]}{'  (CHANGED since last run)' if s['code_changed'] else ''}")
+    if suite:
+        print(f"Tests         suite {suite['suite_id'][:8]}, {_count_tests(suite['test_code'])} test functions "
+              f"(CURRENT; {s['superseded']} older versions kept)")
+    if last:
+        print(f"Last run      {last['run_timestamp']}  {last['passed_tests']}/{last['total_tests']} passed")
+        for n in s["notes"]:
+            print(f"Report        {n['outcome']} -> {n['recipient'] or '(outbox)'}  [{n['approval']}]"
+                  + (f"  error: {n['error']}" if n["error"] else ""))
+        if last["failure_analysis"]:
+            print("Evidence      (agent diagnosis of the last run)")
+            for line in last["failure_analysis"].splitlines()[:14]:
+                print(f"              {line}")
+    for a in s["pending"]:
+        print(f"Approval      {a['approval_id'][:8]} PENDING: agent repaired tests (suite {a['suite_id'][:8]})")
+        for r in json.loads(a["details"]):
+            print(f"              - {', '.join(r['tests'])}: {r['reason']}")
+            print(f"                spec: \"{r['spec_quote']}\"")
+    print(f"Next action   {s['action']}")
+
+
+def decide(root: str, ids: list[str], approve: bool) -> int:
+    cfg = load_config(root)
+    mem = open_memory(cfg)
+    try:
+        pending = mem.pending_approvals()
+        if not pending:
+            print("No pending approvals.")
+            return 0
+        if approve and (not ids or ids == ["all"]):
+            chosen = pending
+        else:
+            chosen = [a for a in pending if any(a["approval_id"].startswith(i) for i in ids)]
+        if not chosen:
+            print("Give an approval id from `spectest status`" + (" (or `all`)." if approve else "."))
+            return 2
+        current = mem.current_suite()
+        for a in chosen:
+            mem.decide_approval(a["approval_id"], approve)
+            if approve:
+                print(f"Approved {a['approval_id'][:8]}: the repaired tests stay, and their lessons now guide "
+                      f"future test generation.")
+            elif current and current["suite_id"] == a["suite_id"]:
+                previous = mem.suite(a["previous_suite_id"])
+                mem.save_suite(current["commit_sha"], previous["spec_hash"], previous["test_code"])
+                print(f"Rejected {a['approval_id'][:8]}: the original tests are restored and will run next time.")
+            else:
+                print(f"Rejected {a['approval_id'][:8]}: its lessons are discarded (tests were already regenerated).")
+            log(cfg, "approval_decided", approval_id=a["approval_id"][:8], decision="approved" if approve else "rejected")
+        return 0
+    finally:
+        mem.close()
+
+
 def show_history(root="."):
     cfg = load_config(root)
-    mem = Memory(cfg.db_path)
+    mem = open_memory(cfg)
     for r in mem.history():
         print(f"{r['run_timestamp']}  {r['commit_sha'][:16]:16}  {r['passed_tests']}/{r['total_tests']} passed  "
-              f"email_sent={bool(r['email_sent'])}  suite={r['suite_id'][:8]}")
+              f"report_delivered={bool(r['email_sent'])}  suite={r['suite_id'][:8]}")
     mem.close()
 
 
-def run_and_print(root) -> int:
+def run_and_print(root, use_memory: bool = True) -> int:
     try:
-        final = run(root)
+        final = run(root, use_memory)
     except Exception as e:  # keep the watcher alive on unexpected errors
         print(f"ERROR: {type(e).__name__}: {e}")
         return 2
@@ -298,15 +448,19 @@ def run_and_print(root) -> int:
 
 def main():
     parser = argparse.ArgumentParser(prog="spectest", description="Spec-driven pytest agent")
-    parser.add_argument("command", choices=["init", "run", "watch", "history", "config", "remove"])
-    parser.add_argument("folders", nargs="*", help="init: source folder(s) to test (default: auto-detect)")
+    parser.add_argument("command", choices=["init", "run", "status", "approve", "reject", "watch", "history",
+                                            "config", "remove"])
+    parser.add_argument("items", nargs="*", metavar="folders|ids",
+                        help="init: source folder(s) to test (default: auto-detect); approve/reject: approval id(s)")
     parser.add_argument("--root", default=".", help="project folder (default: current folder; "
-                                                    "run/watch/history also search parent folders)")
+                                                    "other commands also search parent folders)")
     parser.add_argument("--force", action="store_true",
                         help="init: allow home or drive-root folders; remove: even while a run is active")
     parser.add_argument("--yes", action="store_true", help="remove: don't ask for confirmation")
     parser.add_argument("--git-hook", action="store_true",
                         help="init: also test every commit via a git post-commit hook (no watcher needed)")
+    parser.add_argument("--no-memory", action="store_true",
+                        help="run: ignore everything stored in memory (for comparison experiments)")
     parser.add_argument("--path", action="store_true", help="config: print the settings file location")
     parser.add_argument("--check", action="store_true", help="config: test API keys and the email login")
     parser.add_argument("--test-email", nargs="?", const="", metavar="ADDRESS",
@@ -314,8 +468,8 @@ def main():
     args = parser.parse_args()
     sys.stdout.reconfigure(line_buffering=True, errors="replace")  # watcher output shows immediately; never crash
     sys.stderr.reconfigure(errors="replace")  # on characters the console can't display (e.g. Windows cp1252)
-    if args.folders and args.command != "init":
-        parser.error(f"folders are only used by `spectest init`, not `spectest {args.command}`")
+    if args.items and args.command not in ("init", "approve", "reject"):
+        parser.error(f"extra arguments are only used by init/approve/reject, not `spectest {args.command}`")
 
     if args.command == "remove":
         from spectest import remove
@@ -323,43 +477,43 @@ def main():
     if args.command == "config":
         from spectest import config_cmd
         sys.exit(config_cmd.run(args))
-    if args.command == "init":
-        from spectest.scaffold import init_project
-        try:
-            created, warnings = init_project(args.root, force=args.force, folders=args.folders)
-        except (ValueError, FileNotFoundError) as e:
-            print(f"ERROR: {e}")
-            sys.exit(2)
-        print("\n".join(f"  created {c}" for c in created) or "  already initialized, nothing to do")
-        for w in warnings:
-            print(f"  WARNING: {w}")
-        cfg = load_config(args.root)
-        print(f"  testing code in: {', '.join(d.relative_to(cfg.root).as_posix() or '.' for d in cfg.source_dirs)}"
-              f" (change with `source_dir:` in SPECTEST.md)")
-        if args.git_hook:
-            from spectest import githook
-            try:
-                hook = githook.install_hook(cfg.root, cfg.workspace.relative_to(cfg.root).as_posix())
-                print(f"  git hook: every commit is tested in the background ({hook}); "
-                      f"output in {cfg.workspace.name}/logs/hook.log")
-            except ValueError as e:
-                print(f"  WARNING: git hook not installed: {e}")
-        print("Next: write docs/FEATURE_SPEC.md, review SPECTEST.md, add API keys with `spectest config`, then `spectest run`.")
-    elif args.command == "history":
-        try:
+    try:
+        if args.command == "init":
+            init_command(args)
+        elif args.command == "status":
+            print_status(args.root)
+        elif args.command in ("approve", "reject"):
+            sys.exit(decide(args.root, args.items, approve=args.command == "approve"))
+        elif args.command == "history":
             show_history(args.root)
-        except FileNotFoundError as e:
-            print(f"ERROR: {e}")
-            sys.exit(2)
-    elif args.command == "watch":
-        from spectest.watcher import watch
-        try:
+        elif args.command == "watch":
+            from spectest.watcher import watch
             watch(args.root, run_and_print)
-        except (ValueError, FileNotFoundError) as e:
-            print(f"ERROR: {e}")
-            sys.exit(2)
-    else:
-        sys.exit(run_and_print(args.root))
+        else:
+            sys.exit(run_and_print(args.root, use_memory=not args.no_memory))
+    except (ValueError, FileNotFoundError) as e:
+        print(f"ERROR: {e}")
+        sys.exit(2)
+
+
+def init_command(args):
+    from spectest.scaffold import init_project
+    created, warnings = init_project(args.root, force=args.force, folders=args.items)
+    print("\n".join(f"  created {c}" for c in created) or "  already initialized, nothing to do")
+    for w in warnings:
+        print(f"  WARNING: {w}")
+    cfg = load_config(args.root)
+    print(f"  testing code in: {', '.join(d.relative_to(cfg.root).as_posix() or '.' for d in cfg.source_dirs)}"
+          f" (change with `source_dir:` in SPECTEST.md)")
+    if args.git_hook:
+        from spectest import githook
+        try:
+            hook = githook.install_hook(cfg.root, cfg.workspace.relative_to(cfg.root).as_posix())
+            print(f"  git hook: every commit is tested in the background ({hook}); "
+                  f"output in {cfg.workspace.name}/logs/hook.log")
+        except ValueError as e:
+            print(f"  WARNING: git hook not installed: {e}")
+    print("Next: write docs/FEATURE_SPEC.md, review SPECTEST.md, add API keys with `spectest config`, then `spectest run`.")
 
 
 if __name__ == "__main__":

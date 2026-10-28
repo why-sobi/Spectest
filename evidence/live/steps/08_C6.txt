@@ -1,0 +1,17 @@
+$ spectest run
+# expected: planted test fails; TEST BUG; agent repairs it quoting the spec; repair held PENDING
+
+[spectest] onboard: action=rerun, commit_sha=nogit-60dbdc158c13, spec_version=2
+[spectest] tests_executed: exit_code=1, total=27, passed=26, failed=1
+[spectest] agent_tool: tool=read_file, result=spectest_tests/test_incidentzero_spec.py (lines 340-367 of 367)
+[spectest] agent_tool: tool=edit_tests, result=ACCEPTED: test file updated. Call run_tests to verify.
+[spectest] agent_tool: tool=run_tests, result=27/27 passed; failing: none
+[spectest] investigated: steps=4, repairs=1, error=
+[spectest] approval_requested: approval_id=90428432, kind=test_repair, tests=test_retry_backoff_starts_at_two_seconds
+[spectest] tests_executed: exit_code=0, total=27, passed=27, failed=0
+[spectest] email_sent: channel=outbox, to=
+[SpecTest] incidentzero @ nogit-60dbdc: PASS (27/27 passed, 1 test(s) repaired)
+[spectest] groq unavailable (HTTP 413); skipping it for 600s
+[spectest] gemini unavailable (HTTP 429); skipping it for 3600s
+[spectest] warning: groq: APIStatusError: Error code: 413 - {'error': {'message': 'Request too large for model `openai/gpt-oss-120b` in organization `org_01jz0qh94wftsszrwdn2bnw8cy` service tier `on_demand` on tokens per minute (TPM): Limit 8000, Requested 8363, please reduce your message size and try again. Need more  -> fell back to openrouter
+[spectest] warning: gemini: RateLimitError: Error code: 429 - [{'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https:// -> fell back to openrouter

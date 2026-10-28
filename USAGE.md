@@ -22,9 +22,11 @@ Creates `SPECTEST.md`, `docs/FEATURE_SPEC.md`, `.spectest/` and `spectest_tests/
 ## Commands
 | Command | Does |
 |---|---|
-| `spectest run` | one check; exit code `0` = all passed, `1` = failures, `2` = error |
+| `spectest run` | one check; exit code `0` = all passed, `1` = failures, `2` = error (`--no-memory`: ignore memory, for comparisons) |
+| `spectest status` | current state, recommended next action, supporting evidence, pending approvals |
+| `spectest approve [id\|all]` / `spectest reject <id>` | accept or undo the agent's test repairs |
 | `spectest watch` | runs on every change to the spec, `SPECTEST.md` or `.py` files (Ctrl+C stops) |
-| `spectest history` | past runs |
+| `spectest history` | past runs (`python scripts/inspect_memory.py` shows all memory tables and the action log) |
 | `spectest config [--check \| --test-email [addr] \| --path]` | shared settings (keys, email) |
 | `spectest init [folders] [--force]` | set up a folder; `folders` = code to test (default: auto-detect) |
 | `spectest remove [--yes]` | take SpecTest out of the project (asks first; keeps your edited spec and `.env` rule) |

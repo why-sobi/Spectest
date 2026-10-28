@@ -10,8 +10,13 @@ from dataclasses import dataclass, field
 from pathlib import Path
 
 # Generated code is untrusted: only these top-level imports are allowed.
-ALLOWED_IMPORTS = {"pytest", "math", "decimal", "fractions", "re", "datetime", "base64", "io", "json", "types",
-                   "collections", "itertools", "functools", "dataclasses", "typing", "enum", "string"}
+# Harmless standard-library modules: no process control, network, raw file-system tools or code loading.
+# Blocked by omission: os, sys, subprocess, shutil, socket, http, urllib, ctypes, pickle, importlib, builtins...
+ALLOWED_IMPORTS = {"pytest", "math", "cmath", "decimal", "fractions", "statistics", "random", "re", "string",
+                   "textwrap", "datetime", "time", "calendar", "base64", "io", "json", "csv", "types", "typing",
+                   "collections", "itertools", "functools", "operator", "copy", "dataclasses", "enum", "abc",
+                   "numbers", "heapq", "bisect", "uuid", "hashlib", "pathlib", "tempfile", "unittest", "contextlib",
+                   "warnings", "logging", "inspect", "__future__"}
 IO_FILE_ACCESS = {"open", "open_code", "FileIO"}  # `io` is allowed for BytesIO/StringIO, not for opening files
 PYTEST_TIMEOUT = 300  # seconds for the whole suite
 SKIP_MARKERS = {"skip", "skipif", "xfail", "importorskip"}
@@ -74,34 +79,53 @@ def quote_in_spec(quote: str, spec: str) -> bool:
     return len(q) >= MIN_SPEC_QUOTE and q in _normalize(spec)
 
 
+def _shared_code(tree: ast.Module) -> str:
+    """Everything in a test file except the test functions themselves (fixtures, helpers, imports, constants)."""
+    def keep(node):
+        return not (isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)) and node.name.startswith("test_"))
+    body = []
+    for node in tree.body:
+        if isinstance(node, ast.ClassDef):
+            node = ast.ClassDef(**{**{f: getattr(node, f) for f in node._fields}, "body": [n for n in node.body if keep(n)]})
+        if keep(node):
+            body.append(node)
+    return ast.dump(ast.Module(body=body, type_ignores=[]))
+
+
 def check_repair(old_code: str, new_code: str, repaired: list[str], failing: set[str], spec: str,
                  spec_quote: str, project_modules: set[str]) -> str | None:
     """Deterministic rules for an agent-proposed test fix. Returns a rejection reason, or None if allowed.
 
-    The agent may only change tests that are failing right now, may not delete tests or skip them, and must
-    quote the spec text that shows the test (not the code) is wrong.
+    The agent may only change test functions that are failing right now, may not delete, rename or skip tests,
+    and must quote the spec text that shows the test (not the code) is wrong. Shared test code (fixtures,
+    helpers, imports) may change too, but only as part of fixing tests that are currently failing.
     """
     problem = validate_test_code(new_code, project_modules)
     if problem:
         return problem
-    tree = ast.parse(new_code)
+    old_tree, tree = ast.parse(old_code), ast.parse(new_code)
     for node in ast.walk(tree):
         if isinstance(node, ast.Attribute) and node.attr in SKIP_MARKERS:
             return f"Skipping tests is not allowed (found `{node.attr}`)"
 
-    old, new = test_functions(ast.parse(old_code)), test_functions(tree)
+    old, new = test_functions(old_tree), test_functions(tree)
     removed = sorted(set(old) - set(new))
     if removed:
         return f"Deleting or renaming tests is not allowed: {', '.join(removed)}"
+    declared = {name.split("[")[0] for name in repaired}  # parametrized ids like test_x[case] -> test_x
     changed = {name for name in old if old[name] != new[name]}
-    undeclared = sorted(changed - set(repaired))
+    undeclared = sorted(changed - declared)
     if undeclared:
         return f"Changed tests not listed in repaired_tests: {', '.join(undeclared)}"
     not_failing = sorted(changed - failing)
     if not_failing:
         return f"Only currently failing tests may be changed; these were passing: {', '.join(not_failing)}"
-    if not changed:
-        return "No existing test was changed"
+    helpers_changed = _shared_code(old_tree) != _shared_code(tree)
+    if not changed and not helpers_changed:
+        return "Nothing in the test file was changed"
+    if helpers_changed and not declared & failing:
+        return ("Fixtures/helpers may only change to fix currently failing tests; list those tests in "
+                "repaired_tests")
     if not quote_in_spec(spec_quote, spec):
         return "spec_quote must be an exact passage (10+ characters) from the spec that proves the test is wrong"
     return None

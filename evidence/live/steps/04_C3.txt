@@ -1,0 +1,27 @@
+$ spectest status
+# expected: state reloaded from SQLite in a new process
+
+Project       incidentzero   (C:\Users\Sobi\AppData\Local\Temp\spectest_live_17cd0o4e\IncidentZero)
+Spec          docs/FEATURE_SPEC.md v1
+Code          nogit-639abb895ce8
+Tests         suite 21a00ca9, 15 tests (CURRENT; 1 older versions kept)
+Last run      2026-10-27 11:57:44  20/23 passed
+Report        saved_to_outbox -> (outbox)  [automatic: no recipient configured, saved to outbox]
+Evidence      (agent diagnosis of the last run)
+              Three failing tests are due to LoopGuard.record returning True too early. The implementation uses a >= comparison, but the specification requires returning True only after the count exceeds max_same_action_repeats.
+              
+              - test_loop_guard_detects_repeats_and_respects_limit: CODE BUG at incidentzero/agent/policies.py:78
+                Why: LoopGuard.record returns True when the count reaches max_same_action_repeats (using >=). The spec says it should return True only when the count is *more than* max_same_action_repeats.
+                Fix: Change the comparison on line 78 from `self._counts[fingerprint] >= self.max_same_action_repeats` to `self._counts[fingerprint] > self.max_same_action_repeats`.
+              
+              - test_loop_guard_argument_order_independence: CODE BUG at incidentzero/agent/policies.py:78
+                Why: Same bug as above: the method returns True on the second identical call instead of after exceeding the repeat limit.
+                Fix: Change the comparison on line 78 from `self._counts[fingerprint] >= self.max_same_action_repeats` to `self._counts[fingerprint] > self.max_same_action_repeats`.
+              
+              - test_loop_guard_resets_on_world_version_change: CODE BUG at incidentzero/agent/policies.py:78
+                Why: The method incorrectly flags the second call after a world version reset as a repeat because it uses >=. It should only flag after exceeding the limit.
+                Fix: Change the comparison on line 78 from `self._counts[fingerprint] >= self.max_same_action_repeats` to `self._counts[fingerprint] > self.max_same_action_repeats`.
+Approval      c9d2ef36 PENDING: agent repaired tests (suite 21a00ca9)
+              - test_agent_state_observe_result_updates: The test incorrectly calculated which evidence_id should be the oldest in the truncated list of 8 results. With 12 results added, the 5th result (eid-12) should be the first of the 8 most recent.
+                spec: "the result is appended to `last_tool_results`, which keeps only the 8 most recent results."
+Next action   Review the agent's test repairs below, then `spectest approve` or `spectest reject <id>`.

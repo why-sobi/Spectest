@@ -1,0 +1,7 @@
+$ spectest approve all
+# expected: developer approves; lesson becomes active
+
+Approved c9d2ef36: the repaired tests stay, and their lessons now guide future test generation.
+[spectest] approval_decided: approval_id=c9d2ef36, decision=approved
+Approved 90428432: the repaired tests stay, and their lessons now guide future test generation.
+[spectest] approval_decided: approval_id=90428432, decision=approved

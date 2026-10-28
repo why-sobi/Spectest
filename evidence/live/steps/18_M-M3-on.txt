@@ -1,0 +1,12 @@
+$ spectest run
+# expected: updates the previous suite: >=80% of existing tests kept, including the approved repaired test
+
+[spectest] spec_baseline_created: version=3, spec_hash=baec2dcc41c2
+[spectest] onboard: action=generate, commit_sha=nogit-60dbdc158c13, spec_version=3
+[spectest] tests_generated: attempt=1, provider=openrouter, valid=True, problem=, used_previous_suite=True, lessons=2
+[spectest] tests_executed: exit_code=0, total=28, passed=28, failed=0
+[spectest] email_sent: channel=outbox, to=
+[SpecTest] incidentzero @ nogit-60dbdc: PASS (28/28 passed)
+[spectest] gemini unavailable (HTTP 429); skipping it for 3600s
+[spectest] warning: groq: unusable reply -> fell back to openrouter
+[spectest] warning: gemini: RateLimitError: Error code: 429 - [{'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https:// -> fell back to openrouter

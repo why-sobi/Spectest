@@ -7,7 +7,7 @@ SpecTest turns a plain-language feature spec (`docs/FEATURE_SPEC.md`) into a pyt
 - **Safe by design:** the agent can read your project but can write only its own test file, under rules enforced in code.
 - **Stays out of git:** everything SpecTest creates is added to `.gitignore`.
 
-**Quick reference: [USAGE.md](USAGE.md)**
+**Quick reference: [USAGE.md](USAGE.md)** · **Assignment deliverables: [see below](#assignment-deliverables)**
 
 ---
 
@@ -93,6 +93,9 @@ Then:
 spectest init       # set up the current folder (never overwrites existing files)
 spectest init pkg   # ...and say which folder(s) hold the code (default: auto-detect)
 spectest run        # one pass; exit code 0 = all passed, 1 = failures, 2 = error
+spectest status     # current state, recommended next action, supporting evidence, pending approvals
+spectest approve    # accept the agent's test repairs (or: spectest approve <id>)
+spectest reject ID  # undo an agent test repair: the original tests come back
 spectest watch      # run now, then again on every change to the spec, SPECTEST.md or .py files (Ctrl+C stops)
 spectest history    # past runs from this project's memory
 spectest config     # shared settings: API keys + email (--check, --test-email, --path)
@@ -261,10 +264,12 @@ Every step is logged to `.spectest/logs/agent.jsonl`, including each tool the in
 ```bash
 uv venv && uv pip install -r requirements.txt
 python -m spectest.main run --root path/to/project     # run without installing
-python -m spectest.evaluation                          # 17 scenarios, stub LLM, no keys, never uses your settings
+python -m spectest.evaluation --out evidence/offline   # 20 scenarios, stub LLM, no keys, never uses your settings
+python scripts/live_evaluation.py --incidentzero <path> --out evidence/live [--send-email]   # real LLMs
 ```
 
-The evaluation copies the sample calculator project into a temp folder and checks 17 scenarios:
+The offline evaluation copies the sample calculator project into a temp folder and checks 20 scenarios (the
+table with inputs, saved state, expected and observed behaviour is written to `evidence/offline/scenarios.md`):
 1. first run
 2. no change
 3. restart continuity
@@ -280,8 +285,11 @@ The evaluation copies the sample calculator project into a temp folder and check
 13. self-repair guardrails and learning
 14. generation context (methods, docstrings) and the investigator's step budget
 15. investigator hardening: unverified CODE BUG claims, invented tools, inexact edits, provider cool-downs
-16. `spectest remove`: refuses during runs, cleans up, keeps your spec and `.env` rule
-17. git hook: added next to an existing hook, once per project, removed cleanly
+16. isolation: a second project cannot reach the first project's memory
+17. tool failure and retry: a failed email delivery is recorded and retried exactly once
+18. approval rejection: rejecting an agent repair restores the original tests and discards its lesson
+19. `spectest remove`: refuses during runs, cleans up, keeps your spec and `.env` rule
+20. git hook: added next to an existing hook, once per project, removed cleanly
 
 The evaluation sets `SPECTEST_CONFIG_DIR` to an empty temp folder, so it never sees your API keys or email settings.
 
@@ -296,7 +304,7 @@ spectest/
 ├── config_cmd.py      `spectest config`
 ├── remove.py          `spectest remove`
 ├── githook.py         `spectest init --git-hook`
-├── evaluation.py      evaluation scenarios
+├── evaluation.py      offline evaluation scenarios (stub LLM)
 └── tools/
     ├── llm_bridge.py   Groq -> Gemini -> OpenRouter fallback, prompts, tool calling
     ├── agent_tools.py  read-only project access for the investigator
@@ -304,4 +312,27 @@ spectest/
     ├── spec_reader.py  spec/source hashing and signatures
     └── notifier.py     report email (SMTP or outbox)
 ```
-`src/` and `docs/` in this repo are a sample calculator project used for the demo and the evaluation.
+`src/` and `docs/FEATURE_SPEC.md` are a small sample calculator project used by the offline evaluation.
+`scripts/live_evaluation.py` runs SpecTest with real LLMs on a copy of IncidentZero (my Assignment 1), using
+the spec in `samples/incidentzero/FEATURE_SPEC.md`.
+`samples/tabsplit/` is a small bill-splitting library (spec + code) used for the live demonstration (`DEMO.md`).
+
+---
+
+## Assignment deliverables
+
+| Required | Where |
+|---|---|
+| Technical report (4–6 pages) | [`docs/REPORT.pdf`](docs/REPORT.pdf) (also `.docx`, and `.md` source); AI-assistance disclosure in its *Disclosure* section |
+| Source code | `spectest/`, `scripts/` |
+| Dependency versions | `requirements.txt` (direct, pinned), `requirements-lock.txt` (full environment) |
+| Setup instructions | [Setup](#setup) above, [`USAGE.md`](USAGE.md) |
+| Configuration example without secrets | `config.example.env`, `examples/SPECTEST.example.md` |
+| Memory schema and initialization | `docs/schema.sql`, [`docs/MEMORY.md`](docs/MEMORY.md), `spectest/memory.py` (created by `spectest init`) |
+| Anonymized sample inputs | `docs/FEATURE_SPEC.md` + `src/` (calculator), `samples/incidentzero/FEATURE_SPEC.md`, `samples/tabsplit/` |
+| Scenario results | [`evidence/RESULTS.md`](evidence/RESULTS.md) (summary), `evidence/offline/scenarios.md`, `evidence/live/steps/` |
+| Logs | `evidence/live/agent_log.jsonl`, `evidence/offline/evaluation_agent_log.jsonl` |
+| Generated outputs | `evidence/live/generated_tests_*.py`, `evidence/live/outbox/` (reports), `evidence/live/memory_dump.json` |
+| Demonstration script | [`DEMO.md`](DEMO.md) |
+
+

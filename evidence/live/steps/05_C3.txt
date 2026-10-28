@@ -1,0 +1,5 @@
+$ spectest run
+# expected: no change since C2: nothing regenerated, no duplicate report, 0 LLM calls
+
+[spectest] onboard: action=noop, commit_sha=nogit-639abb895ce8, spec_version=1
+No changes detected (spec v1, commit nogit-639abb). Last run: 20/23 passed.
